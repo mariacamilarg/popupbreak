@@ -1,4 +1,6 @@
 package com.designproject.view;
 
-public class TabLearnMore {
+import javax.swing.JComponent;
+
+public class TabLearnMore extends JComponent {
 }

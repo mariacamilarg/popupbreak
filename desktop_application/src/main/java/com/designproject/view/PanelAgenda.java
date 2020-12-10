@@ -1,6 +1,8 @@
 package com.designproject.view;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.GridLayout;
 
 public class PanelAgenda extends JPanel {
 
@@ -26,7 +28,9 @@ public class PanelAgenda extends JPanel {
         this.interfacePopUpBreak = interfacePopUpBreak;
 
         // Set layout
+        setLayout(new GridLayout(10,1));
 
+        add(new JLabel("space for agenda... "));
     }
 
     // -----------------------------------------------------------------

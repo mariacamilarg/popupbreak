@@ -1,4 +1,6 @@
 package com.designproject.view;
 
-public class TabSettings {
+import javax.swing.JComponent;
+
+public class TabSettings extends JComponent {
 }

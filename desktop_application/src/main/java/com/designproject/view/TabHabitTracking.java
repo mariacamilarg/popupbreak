@@ -1,4 +1,6 @@
 package com.designproject.view;
 
-public class TabHabitTracking {
+import javax.swing.JComponent;
+
+public class TabHabitTracking extends JComponent {
 }
