@@ -49,20 +49,21 @@ public class PanelTabs extends JTabbedPane {
         this.interfacePopUpBreak = interfacePopUpBreak;
 
         // Set layout
-        ImageIcon icon = new ImageIcon("resources/icons/home.png"); // TODO: put an icon for each tab
-
         tabHome = new TabHome();
-        addTab("Home", icon, tabHome,"Main view of application");
+        ImageIcon homeIcon = new ImageIcon(getClass().getResource("/icons/home.png"));
+        addTab("Home", homeIcon, tabHome,"Main view of application");
 
         tabHabitTracking = new TabHabitTracking();
-        addTab("Habit Tracking", icon, tabHabitTracking,"To view stat summaries");
+        ImageIcon habitTrackingIcon = new ImageIcon(getClass().getResource("/icons/tracking.png"));
+        addTab("Habit Tracking", habitTrackingIcon, tabHabitTracking,"To view stat summaries");
 
         tabLearnMore = new TabLearnMore();
-        addTab("Learn More", icon, tabLearnMore,"To gather more knowledge");
+        ImageIcon learnMoreIcon = new ImageIcon(getClass().getResource("/icons/learn.png"));
+        addTab("Learn More", learnMoreIcon, tabLearnMore,"To gather more knowledge");
 
         tabSettings = new TabSettings();
-        addTab("Settings", icon, tabSettings,"To tweak the reminders");
-
+        ImageIcon settingsIcon = new ImageIcon(getClass().getResource("/icons/settings.png"));
+        addTab("Settings", settingsIcon, tabSettings,"To tweak the reminders");
     }
 
     // -----------------------------------------------------------------
