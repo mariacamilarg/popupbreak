@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import java.io.IOException;
 
 public class PanelTabs extends JTabbedPane {
 
@@ -43,7 +44,7 @@ public class PanelTabs extends JTabbedPane {
     /**
      * Creates a panel with tabs on top that represent each screen of the desktop app
      */
-    public PanelTabs(InterfacePopUpBreak interfacePopUpBreak) {
+    public PanelTabs(InterfacePopUpBreak interfacePopUpBreak) throws IOException {
 
         // Initialize attributes
         this.interfacePopUpBreak = interfacePopUpBreak;
