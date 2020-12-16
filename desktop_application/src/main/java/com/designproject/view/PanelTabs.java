@@ -36,6 +36,11 @@ public class PanelTabs extends JTabbedPane {
      */
     private TabSettings tabSettings;
 
+    /**
+     * Panel: time to break
+     */
+    private TabTimeToBreak tabTimeToBreak;
+
     // -----------------------------------------------------------------
     // Constructors
     // -----------------------------------------------------------------
@@ -62,6 +67,9 @@ public class PanelTabs extends JTabbedPane {
 
         tabSettings = new TabSettings();
         addTab("Settings", icon, tabSettings,"To tweak the reminders");
+
+        tabTimeToBreak = new TabTimeToBreak();
+        addTab("01:05 min left until you next break", icon, tabTimeToBreak,"To tweak the reminders");
 
     }
 
