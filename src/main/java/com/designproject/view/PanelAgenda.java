@@ -6,6 +6,8 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.designproject.utils.ImageUtils.resizeIcon;
+
 public class PanelAgenda extends JPanel {
 
     // -----------------------------------------------------------------
@@ -34,7 +36,13 @@ public class PanelAgenda extends JPanel {
 
         // Set style
         setBackground(Color.WHITE);
-        this.setBorder(new EmptyBorder(20, 10, 10, 10));
+        this.setBorder(new EmptyBorder(5, 10, 10, 10));
+
+        // Set title
+        JLabel jLabel = new JLabel("AGENDA", JLabel.CENTER);
+        jLabel.setBackground(Color.WHITE);
+        add(jLabel);
+        add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Initialize day commitments
         ArrayList<JCheckBox> dayCommitments = new ArrayList<>();
@@ -65,7 +73,7 @@ public class PanelAgenda extends JPanel {
         for (int i = 0; i < dayCommitments.size(); i++) {
             dayCommitments.get(i).setVerticalTextPosition(SwingConstants.NORTH);
             add(dayCommitments.get(i));
-            add(Box.createRigidArea(new Dimension(0, 10)));;
+            add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
         // Initialize calendar button
@@ -84,8 +92,4 @@ public class PanelAgenda extends JPanel {
     // Methods
     // -----------------------------------------------------------------
 
-    public static ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
-        Image image = icon.getImage().getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH);
-        return new ImageIcon(image);
-    }
 }

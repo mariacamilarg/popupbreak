@@ -79,7 +79,7 @@ public class TabHome extends JPanel {
         JButton button_yes = new JButton("Sure!");
         JButton button_no = new JButton("Maybe later...");
 
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 2;
@@ -88,10 +88,11 @@ public class TabHome extends JPanel {
         c.insets = new Insets(50,10,10,10);
         panel_right.add(button_yes, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 2;
+        c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
         panel_right.add(button_no, c);
 
