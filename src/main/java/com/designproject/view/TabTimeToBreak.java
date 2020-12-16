@@ -3,11 +3,13 @@ package com.designproject.view;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import static com.designproject.utils.ImageUtils.resizeIcon;
 
-public class TabTimeToBreak extends JComponent {
+public class TabTimeToBreak extends JComponent implements ActionListener {
 
     // -----------------------------------------------------------------
     // Attributes
@@ -15,6 +17,7 @@ public class TabTimeToBreak extends JComponent {
     JPanel panelRight;
     JPanel panelLeft;
     AbstractBorder bubbleBorder;
+    JLabel glassLabel;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -29,6 +32,8 @@ public class TabTimeToBreak extends JComponent {
         panelLeft = new JPanel(new BorderLayout());
         panelRight = new JPanel(new GridBagLayout());
         bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
+        glassLabel = new JLabel(resizeIcon(
+                new ImageIcon(getClass().getResource("/images/glass1.png")), 80, 100));
 
         // Set style
         setBackground(Color.WHITE);
@@ -48,68 +53,92 @@ public class TabTimeToBreak extends JComponent {
 
         // msg1
         JLabel waterBreakLabel = new JLabel(
-                "<html>Could you please let me know approximately how much water will you take? </html>");
+                "<html>Could you please let me know approximately how much water <br> will you take? </html>");
         waterBreakLabel.setBorder(bubbleBorder);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 2;
+        c.gridwidth = 4;
         c.ipady = 20;
         c.insets = new Insets(20,20,20,20);
         panelRight.add(waterBreakLabel, c);
 
         // img and buttons
-        JLabel glassLabel = new JLabel(resizeIcon(
-                new ImageIcon(getClass().getResource("/images/glass.png")), 80, 100));
-        c.gridx = 1;
-        c.gridy = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
         c.gridwidth = 1;
-        c.gridheight = 3;
         c.ipady = 10;
-        c.insets = new Insets(10,10,10,10);
+        c.insets = new Insets(10,40,10,20);
         panelRight.add(glassLabel, c);
 
-//        JButton buttonGlass = new JButton("+1 glass");
-//        c.gridx = 1;
-//        c.gridy = 1;
-//        c.gridwidth = 1;
-//        c.gridheight = 1;
-//        c.ipady = 10;
-//        c.insets = new Insets(10,10,10,10);
-//        panelRight.add(buttonGlass, c);
-//
-//        JButton buttonBottle = new JButton("+1 water bottle");
-//        c.gridx = 2;
-//        c.gridy = 1;
-//        c.gridwidth = 1;
-//        c.gridheight = 1;
-//        c.ipady = 10;
-//        c.insets = new Insets(10,10,10,10);
-//        panelRight.add(buttonBottle, c);
-//
-//        JButton buttonLiter = new JButton("+1 liter!");
-//        c.gridx = 3;
-//        c.gridy = 1;
-//        c.gridwidth = 1;
-//        c.gridheight = 1;
-//        c.ipady = 10;
-//        c.insets = new Insets(10,10,10,10);
-//        panelRight.add(buttonLiter, c);
-//
-//        // msg 2
-//        JLabel waterBreakLabel2 = new JLabel(
-//                "<html>In the meantime would you like to learn more <br>" +
-//                        "about good practices for sedentary workers?<html>");
-//        waterBreakLabel2.setBorder(bubbleBorder);
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        c.gridx = 0;
-//        c.gridy = 4;
-//        c.gridwidth = 2;
-//        c.ipady = 20;
-//        c.insets = new Insets(20,20,40,20);
-//        panelRight.add(waterBreakLabel2, c);
+        JButton buttonGlass = new JButton("+1 glass");
+        buttonGlass.addActionListener(this);
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,25);
+        panelRight.add(buttonGlass, c);
 
-        // bottom panel buttons
+        JButton buttonBottle = new JButton("+1 bottle");
+        buttonBottle.addActionListener(this);
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 2;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonBottle, c);
+
+        JButton buttonLiter = new JButton("+1 liter");
+        buttonLiter.addActionListener(this);
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 3;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonLiter, c);
+
+        add(panelRight, BorderLayout.EAST);
+    }
+
+    // -----------------------------------------------------------------
+    // Methods
+    // -----------------------------------------------------------------
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        incrementWater();
+        showMoreMessages();
+    }
+
+    private void incrementWater() {
+        glassLabel.setIcon(resizeIcon(
+                new ImageIcon(getClass().getResource("/images/glass2.png")), 80, 100));
+        repaint();
+    }
+
+    private void showMoreMessages() {
+        //The leftmost column has address gridx=0 and the top row has address gridy=0.
+
+        GridBagConstraints c = new GridBagConstraints();
+
+        // msg 2
+        JLabel waterBreakLabel2 = new JLabel(
+                "<html>In the meantime would you like to learn more about good <br>" +
+                        "practices for sedentary workers?<html>");
+        waterBreakLabel2.setBorder(bubbleBorder);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 4;
+        c.ipady = 20;
+        c.insets = new Insets(20,20,40,20);
+        panelRight.add(waterBreakLabel2, c);
+
+//        // bottom panel buttons
 //        JButton button_yes = new JButton("Sure!");
 //        JButton button_no = new JButton("Maybe later...");
 //
@@ -130,6 +159,6 @@ public class TabTimeToBreak extends JComponent {
 //        c.insets = new Insets(50,10,10,10);
 //        panelRight.add(button_no, c);
 
-        add(panelRight, BorderLayout.EAST);
     }
+
 }
