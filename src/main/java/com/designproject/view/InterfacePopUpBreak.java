@@ -91,6 +91,14 @@ public class InterfacePopUpBreak extends JFrame {
         panelTabs.switchToLearnMore();
     }
 
+    public void switchToSettings() {
+        panelTabs.switchToSettings();
+    }
+
+    public void minimize() {
+        setState(JFrame.ICONIFIED);
+    }
+
 
     // -----------------------------------------------------------------
     // Main

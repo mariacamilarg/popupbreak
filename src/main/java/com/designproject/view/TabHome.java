@@ -6,17 +6,20 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Area;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
 
-public class TabHome extends JPanel {
+public class TabHome extends JPanel implements ActionListener {
 
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
+    InterfacePopUpBreak interfacePopUpBreak;
     JPanel panelRight;
     JPanel panelLeft;
 
@@ -27,9 +30,10 @@ public class TabHome extends JPanel {
     /**
      * Creates a panel with tabs on top that represent each screen of the desktop app
      */
-    public TabHome() {
+    public TabHome(InterfacePopUpBreak interfacePopUpBreak) {
 
         // Initialize attributes
+        this.interfacePopUpBreak = interfacePopUpBreak;
 
         // Set style
         setBackground(Color.WHITE);
@@ -49,11 +53,11 @@ public class TabHome extends JPanel {
         panelRight.setBackground(Color.WHITE);
 
         JLabel welcome1 = new JLabel(
-                "<html>Hi Lucy!<br/> Welcome to a beautiful new day :)<br/> <br/>" +
-                "You can see our planned agenda for today in the right pane</html>");
+                "<html>Hi Lucy!<br/><br/> Welcome to a beautiful new day :)<br/> <br/>" +
+                "You can see our planned agenda for today in the right pane => </html>");
         JLabel welcome2 = new JLabel(
-                "<html>You still have some time until you 9am meeting, let's start<br/> " +
-                "the day with some breathing exercises!<html>");
+                "<html>You still have some time until you 9am meeting, let's start the day <br/> " +
+                "with some breathing exercises!<html>");
 
         AbstractBorder bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
         welcome1.setBorder(bubbleBorder);
@@ -77,8 +81,6 @@ public class TabHome extends JPanel {
         panelRight.add(welcome2, c);
 
         JButton button_yes = new JButton("Sure!");
-        JButton button_no = new JButton("Maybe later...");
-
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -88,6 +90,8 @@ public class TabHome extends JPanel {
         c.insets = new Insets(50,10,10,10);
         panelRight.add(button_yes, c);
 
+        JButton button_no = new JButton("Maybe later...");
+        button_no.addActionListener(this);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
@@ -103,4 +107,8 @@ public class TabHome extends JPanel {
     // Methods
     // -----------------------------------------------------------------
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        interfacePopUpBreak.minimize();
+    }
 }

@@ -7,15 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import static com.designproject.utils.ButtonCommands.ADD_WATER;
+import static com.designproject.utils.ButtonCommands.LEARN_MORE;
+import static com.designproject.utils.ButtonCommands.MINIMIZE;
 import static com.designproject.utils.ImageUtils.resizeIcon;
 
 public class TabTimeToBreak extends JComponent implements ActionListener {
-
-    // -----------------------------------------------------------------
-    // Constants
-    // -----------------------------------------------------------------
-    private final static String ADD_WATER = "ADD_WATER";
-    private final static String LEARN_MORE = "LEARN_MORE";
 
     // -----------------------------------------------------------------
     // Attributes
@@ -119,17 +116,6 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
     // -----------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        String command = actionEvent.getActionCommand();
-        if (ADD_WATER.equals(command)) {
-            incrementWater();
-            showMoreMessages();
-        } else if (LEARN_MORE.equals(command)) {
-            interfacePopUpBreak.switchToLearnMore();
-        }
-    }
-
     private void incrementWater() {
         glassLabel.setIcon(resizeIcon(
                 new ImageIcon(getClass().getResource("/images/glass2.png")), 80, 100));
@@ -156,8 +142,8 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
 
         // bottom panel buttons
         JButton buttonSure = new JButton("Sure!");
-        JButton buttonLater = new JButton("Maybe later...");
-
+        buttonSure.addActionListener(this);
+        buttonSure.setActionCommand(LEARN_MORE);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -167,6 +153,9 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
         c.insets = new Insets(10,10,10,10);
         panelRight.add(buttonSure, c);
 
+        JButton buttonLater = new JButton("Maybe later...");
+        buttonLater.addActionListener(this);
+        buttonLater.setActionCommand(MINIMIZE);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 2;
@@ -177,4 +166,16 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
         panelRight.add(buttonLater, c);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String command = actionEvent.getActionCommand();
+        if (ADD_WATER.equals(command)) {
+            incrementWater();
+            showMoreMessages();
+        } else if (LEARN_MORE.equals(command)) {
+            interfacePopUpBreak.switchToLearnMore();
+        } else if (MINIMIZE.equals(command)) {
+            interfacePopUpBreak.minimize();
+        }
+    }
 }
