@@ -46,7 +46,7 @@ public class DialogPopUp extends JDialog {
         setLayout(new BorderLayout());
 
         // Add gif to center
-        URL url = getClass().getResource("/animations/test.gif");
+        URL url = getClass().getResource("/animations/water.gif");
         JLabel label = new JLabel(new ImageIcon(url));
         add(label, BorderLayout.CENTER);
 
