@@ -3,6 +3,9 @@ package com.designproject.view;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import java.awt.BorderLayout;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 
 public class InterfacePopUpBreak extends JFrame {
@@ -20,6 +23,11 @@ public class InterfacePopUpBreak extends JFrame {
      * Panel: agenda on the right side
      */
     private PanelAgenda panelAgenda;
+
+    /**
+     * Dialog: to show the popup messages
+     */
+    private DialogPopUp dialogPopUp;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -45,12 +53,32 @@ public class InterfacePopUpBreak extends JFrame {
 
         panelAgenda = new PanelAgenda(this);
         add(panelAgenda, BorderLayout.EAST);
+
+        // Pop up handler
+        dialogPopUp = new DialogPopUp(this);
+        timerChecker();
     }
 
     // -----------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------
+    void timerChecker() {
 
+        ScheduledExecutorService s = Executors.newSingleThreadScheduledExecutor();
+        s.schedule(new Runnable() {
+            public void run() {
+                String result = dialogPopUp.run();
+                System.out.print("resultttt: " + result);
+            }
+        }, 5, TimeUnit.SECONDS);
+
+        // Pop-up dialog
+//        DialogPopUp dialogPopUp = new DialogPopUp(this);
+//        String result = dialogPopUp.run();
+//        if (result != null) {
+//            JOptionPane.showMessageDialog(this, "res: " + result);
+//        }
+    }
 
 
     // -----------------------------------------------------------------
