@@ -9,19 +9,23 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class TabLearnMore extends JPanel {
+import static com.designproject.utils.ImageUtils.resizeIcon;
 
-    // -----------------------------------------------------------------
-    // Attributes
-    // -----------------------------------------------------------------
+public class TabLearnMore extends JPanel implements ActionListener {
+
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
     JPanel panelRight;
     JPanel panelLeft;
+    JButton buttonCool;
+    JButton buttonMore;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -31,6 +35,8 @@ public class TabLearnMore extends JPanel {
         // Initialize attributes
         panelLeft = new JPanel(new BorderLayout());
         panelRight = new JPanel(new GridBagLayout());
+        buttonCool = new JButton("Cool!");
+        buttonMore = new JButton("Learn about other habits");
 
         // Set style
         setBackground(Color.WHITE);
@@ -50,11 +56,21 @@ public class TabLearnMore extends JPanel {
         panelRight.setBackground(Color.WHITE);
 
         JLabel msg1 = new JLabel(
-                "<html>Did you know you're already dehydrated when <br/>" +
-                        "you start to feel thirsty?</html>");
-        JLabel msg2 = new JLabel(
-                "<html>Don't wait to take a drink. Instead, practice these simple tips <br/> " +
-                        "to master a hydration habit that lasts for life:<html>");
+                "<html>Did you know you're already dehydrated when you start to feel thirsty?<br/>" +
+                        "Don't wait to take a drink. Instead, practice these simple tips:</html>");
+        JLabel pic = new JLabel(resizeIcon(
+                new ImageIcon(getClass().getResource("/images/water.png")), 236, 240));
+        JLabel tips = new JLabel(
+                "<html><ul><li>Set up a daily goal </li><br/>  " +
+                        "<li>Keep a reusable water bottle</li><br/> " +
+                        "<li>Set up reminders</li><br/> " +
+                        "<li>Replace other drinks with water</li><br/> " +
+                        "<li>Drink a glass of water before meals</li><br/> " +
+                        "<li>Get a water filter</li><br/> " +
+                        "<li>Flavor your water</li><br/></ul></html>");
+        JPanel msg2 = new JPanel(new BorderLayout());
+        msg2.add(pic, BorderLayout.WEST);
+        msg2.add(tips, BorderLayout.CENTER);
 
         AbstractBorder bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
         msg1.setBorder(bubbleBorder);
@@ -66,7 +82,7 @@ public class TabLearnMore extends JPanel {
         c.gridy = 0;
         c.gridwidth = 3;
         c.ipady = 20;
-        c.insets = new Insets(20,20,40,20);
+        c.insets = new Insets(20,20,20,20);
         panelRight.add(msg1, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -74,11 +90,8 @@ public class TabLearnMore extends JPanel {
         c.gridy = 1;
         c.gridwidth = 3;
         c.ipady = 20;
-        c.insets = new Insets(20,20,40,20);
+        c.insets = new Insets(20,20,20,20);
         panelRight.add(msg2, c);
-
-        JButton button_yes = new JButton("Sure!");
-        JButton button_no = new JButton("Maybe later...");
 
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
@@ -87,21 +100,40 @@ public class TabLearnMore extends JPanel {
         c.gridwidth = 1;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panelRight.add(button_yes, c);
+        panelRight.add(buttonCool, c);
 
+        buttonMore.addActionListener(this);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 2;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panelRight.add(button_no, c);
+        panelRight.add(buttonMore, c);
 
         add(panelRight, BorderLayout.EAST);
-
     }
 
     // -----------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------
+
+    public void learnMoreHabits() {
+        this.removeAll();
+
+        setLayout(new GridLayout(2,3));
+
+        JLabel pic = new JLabel(resizeIcon(
+                new ImageIcon(getClass().getResource("/images/water.png")), 236, 240));
+
+        // finish this TODO...
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        learnMoreHabits();
+    }
 }
