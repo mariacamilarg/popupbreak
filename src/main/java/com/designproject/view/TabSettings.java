@@ -91,6 +91,7 @@ public class TabSettings extends JComponent {
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 0 ;
         c.weightx = 0.5;
+        c.weighty = 0.5;
         Titles.add(ONOFF,c);
 
         JLabel reminder = new JLabel("  Reminder  ");
