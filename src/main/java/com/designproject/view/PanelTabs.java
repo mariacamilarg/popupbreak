@@ -95,4 +95,8 @@ public class PanelTabs extends JTabbedPane {
     public void switchToSettings() {
         this.setSelectedIndex(3);
     }
+
+    public void switchToBreak() {
+        this.setSelectedIndex(4);
+    }
 }
