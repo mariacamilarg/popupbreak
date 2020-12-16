@@ -1,13 +1,11 @@
 package com.designproject.view;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TabSettings extends JComponent {
-
+public class TabSettings extends JPanel {
 
     //private final Object SwitchButton;
     boolean toggleWaterBreak;
