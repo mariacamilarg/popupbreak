@@ -20,6 +20,7 @@ public class TabHome extends JPanel implements ActionListener {
     // Attributes
     // -----------------------------------------------------------------
     InterfacePopUpBreak interfacePopUpBreak;
+    JLabel virtualCoach;
     JPanel panelRight;
     JPanel panelLeft;
 
@@ -44,8 +45,8 @@ public class TabHome extends JPanel implements ActionListener {
         // Left panel
         panelLeft = new JPanel(new BorderLayout());
         panelLeft.setBackground(Color.WHITE);
-        URL url = getClass().getResource("/animations/hello.gif");
-        panelLeft.add(new JLabel(new ImageIcon(url)), BorderLayout.CENTER);
+        virtualCoach = new JLabel(new ImageIcon(getClass().getResource("/animations/hello.gif")));
+        panelLeft.add(virtualCoach, BorderLayout.CENTER);
         add(panelLeft, BorderLayout.CENTER);
 
         // Right panel
@@ -106,6 +107,10 @@ public class TabHome extends JPanel implements ActionListener {
     // -----------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------
+
+    public void showEndOfDaySummary() {
+        virtualCoach.setIcon(new ImageIcon(getClass().getResource("/animations/happy.gif")));
+    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

@@ -13,4 +13,5 @@ public class ButtonCommands {
     public final static String LATER = "later";
     public final static String NO = "no";
 
+    public final static int SECONDS_TO_POPUP = 5;
 }

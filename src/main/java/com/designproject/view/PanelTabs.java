@@ -99,4 +99,8 @@ public class PanelTabs extends JTabbedPane {
     public void switchToBreak() {
         this.setSelectedIndex(4);
     }
+
+    public void updateTabHome() {
+        tabHome.showEndOfDaySummary();
+    }
 }

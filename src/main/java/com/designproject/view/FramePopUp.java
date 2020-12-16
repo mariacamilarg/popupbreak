@@ -25,7 +25,7 @@ import static com.designproject.utils.ButtonCommands.NO;
 import static com.designproject.utils.ButtonCommands.YES;
 import static com.designproject.utils.ImageUtils.resizeIcon;
 
-public class DialogPopUp extends JFrame implements ActionListener {
+public class FramePopUp extends JFrame implements ActionListener {
 
     // -----------------------------------------------------------------
     // Attributes
@@ -43,7 +43,7 @@ public class DialogPopUp extends JFrame implements ActionListener {
     /**
      * Creates a panel with tabs on top that represent each screen of the desktop app
      */
-    public DialogPopUp(InterfacePopUpBreak interfacePopUpBreak) {
+    public FramePopUp(InterfacePopUpBreak interfacePopUpBreak) {
 
         // Layout
         setTitle("Break time!");
@@ -101,10 +101,9 @@ public class DialogPopUp extends JFrame implements ActionListener {
         return btn;
     }
 
-    public String run() {
+    public void run() {
         this.pack();
         this.setVisible(true);
-        return "response";
     }
 
     @Override
@@ -114,10 +113,9 @@ public class DialogPopUp extends JFrame implements ActionListener {
         if (YES.equals(command)) {
             interfacePopUpBreak.maximize();
             interfacePopUpBreak.switchToBreak();
-            dispose();
-        } else if (NO.equals(command)) {
-            // TODO show sad face and wait 5seconds
-            dispose();
         }
+
+        interfacePopUpBreak.updateTabHome();
+        dispose();
     }
 }

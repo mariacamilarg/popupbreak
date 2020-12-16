@@ -9,6 +9,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 
+import static com.designproject.utils.ButtonCommands.SECONDS_TO_POPUP;
+
 public class InterfacePopUpBreak extends JFrame {
 
     // -----------------------------------------------------------------
@@ -28,7 +30,7 @@ public class InterfacePopUpBreak extends JFrame {
     /**
      * Dialog: to show the popup messages
      */
-    private DialogPopUp dialogPopUp;
+    private FramePopUp framePopUp;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -61,8 +63,8 @@ public class InterfacePopUpBreak extends JFrame {
         add(panelAgenda, BorderLayout.EAST);
 
         // Pop up handler
-        dialogPopUp = new DialogPopUp(this);
-        dialogPopUp.setBackground(Color.WHITE);
+        framePopUp = new FramePopUp(this);
+        framePopUp.setBackground(Color.WHITE);
         timerChecker();
     }
 
@@ -74,17 +76,10 @@ public class InterfacePopUpBreak extends JFrame {
         ScheduledExecutorService s = Executors.newSingleThreadScheduledExecutor();
         s.schedule(new Runnable() {
             public void run() {
-                String result = dialogPopUp.run();
-                System.out.print("resultttt: " + result);
+                framePopUp.run();
             }
-        }, 5, TimeUnit.SECONDS);
+        }, SECONDS_TO_POPUP, TimeUnit.SECONDS);
 
-        // Pop-up dialog
-//        DialogPopUp dialogPopUp = new DialogPopUp(this);
-//        String result = dialogPopUp.run();
-//        if (result != null) {
-//            JOptionPane.showMessageDialog(this, "res: " + result);
-//        }
     }
 
     public void switchToLearnMore() {
@@ -97,6 +92,10 @@ public class InterfacePopUpBreak extends JFrame {
 
     public void switchToBreak() {
         panelTabs.switchToBreak();
+    }
+
+    public void updateTabHome() {
+        panelTabs.updateTabHome();
     }
 
     public void maximize() {
