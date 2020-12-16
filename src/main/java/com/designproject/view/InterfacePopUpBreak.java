@@ -3,6 +3,7 @@ package com.designproject.view;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +45,9 @@ public class InterfacePopUpBreak extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(true);
+
+        // Set style
+        setBackground(Color.WHITE);
 
         // Layout and panels setup
         setLayout(new BorderLayout());

@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import java.awt.Color;
 import java.io.IOException;
 
 public class PanelTabs extends JTabbedPane {
@@ -53,6 +54,9 @@ public class PanelTabs extends JTabbedPane {
 
         // Initialize attributes
         this.interfacePopUpBreak = interfacePopUpBreak;
+
+        // Set style
+        setBackground(Color.WHITE);
 
         // Set layout
         tabHome = new TabHome();
