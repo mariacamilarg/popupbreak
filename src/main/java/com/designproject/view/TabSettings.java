@@ -120,28 +120,28 @@ public class TabSettings extends JComponent {
         panWater.setLayout(new GridLayout(0,9));
         //panWater.setSize(50,10);
 
-
-        JButton switchWater = new JButton("  O  ");
-        switchWater.setBackground(Color.GREEN);
+        JCheckBox switchWater = new JCheckBox("<html></html>", true);
+//        JButton switchWater = new JButton("  O  ");
+//        switchWater.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 1 ;
         Titles.add(switchWater,c);
 
-        switchWater.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().contentEquals("  O  ")) {
-                    switchWater.setBackground(Color.RED);
-                    switchWater.setText("  X  ");
-                    toggleWaterBreak = false;
-                }
-                else {
-                    switchWater.setBackground(Color.GREEN);
-                    switchWater.setText("  O  ");
-                    toggleWaterBreak = true ;
-                }
-            }
-        });
+//        switchWater.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(e.getActionCommand().contentEquals("  O  ")) {
+//                    switchWater.setBackground(Color.RED);
+//                    switchWater.setText("  X  ");
+//                    toggleWaterBreak = false;
+//                }
+//                else {
+//                    switchWater.setBackground(Color.GREEN);
+//                    switchWater.setText("  O  ");
+//                    toggleWaterBreak = true ;
+//                }
+//            }
+//        });
         JLabel waterLab = new JLabel("  Water Reminder  ");
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 1 ;
@@ -194,26 +194,27 @@ public class TabSettings extends JComponent {
         JPanel panExercise = new JPanel();
         panExercise.setLayout(new GridLayout());
 
-        JButton switchExercise = new JButton("  X  ");
-        switchExercise.setBackground(Color.RED);
+        //JButton switchExercise = new JButton("  X  ");
+        JCheckBox switchExercise = new JCheckBox("<html></html>", true);
+        //switchExercise.setBackground(Color.RED);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 2 ;
         Titles.add(switchExercise,c);
-        switchExercise.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().contentEquals("  O  ")) {
-                    switchExercise.setBackground(Color.RED);
-                    switchExercise.setText("  X  ");
-                    toggleExercise = false;
-                }
-                else {
-                    switchExercise.setBackground(Color.GREEN);
-                    switchExercise.setText("  O  ");
-                    toggleExercise = true;
-                }
-            }
-        });
+//        switchExercise.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(e.getActionCommand().contentEquals("  O  ")) {
+//                    switchExercise.setBackground(Color.RED);
+//                    switchExercise.setText("  X  ");
+//                    toggleExercise = false;
+//                }
+//                else {
+//                    switchExercise.setBackground(Color.GREEN);
+//                    switchExercise.setText("  O  ");
+//                    toggleExercise = true;
+//                }
+//            }
+//        });
         JLabel exerciseLab = new JLabel("  Exercise Reminder  ");
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 2 ;
@@ -259,26 +260,27 @@ public class TabSettings extends JComponent {
         JPanel panEye = new JPanel();
         panEye.setLayout(new GridLayout());
 
-        JButton switchEye = new JButton("  O  ");
-        switchEye.setBackground(Color.GREEN);
+        JCheckBox switchEye = new JCheckBox("<html></html>", true);
+//        JButton switchEye = new JButton("  O  ");
+//        switchEye.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 3 ;
         Titles.add(switchEye,c);
-        switchEye.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().contentEquals("  O  ")) {
-                    switchEye.setBackground(Color.RED);
-                    switchEye.setText("  X  ");
-                    toggleEyeExercise = false;
-                }
-                else {
-                    switchEye.setBackground(Color.GREEN);
-                    switchEye.setText("  O  ");
-                    toggleEyeExercise = true;
-                }
-            }
-        });
+//        switchEye.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(e.getActionCommand().contentEquals("  O  ")) {
+//                    switchEye.setBackground(Color.RED);
+//                    switchEye.setText("  X  ");
+//                    toggleEyeExercise = false;
+//                }
+//                else {
+//                    switchEye.setBackground(Color.GREEN);
+//                    switchEye.setText("  O  ");
+//                    toggleEyeExercise = true;
+//                }
+//            }
+//        });
         JLabel eyeLab = new JLabel("  Eye Break Reminder  ");
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 3 ;
@@ -333,26 +335,27 @@ public class TabSettings extends JComponent {
         JPanel panSnack = new JPanel();
         panSnack.setLayout(new GridLayout());
 
-        JButton switchSnack = new JButton("  O  ");
-        switchSnack.setBackground(Color.GREEN);
+        JCheckBox switchSnack = new JCheckBox("<html></html>", true);
+//        JButton switchSnack = new JButton("  O  ");
+//        switchSnack.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 4 ;
         Titles.add(switchSnack,c);
-        switchSnack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().contentEquals("  O  ")) {
-                    switchSnack.setBackground(Color.RED);
-                    switchSnack.setText("  X  ");
-                    toggleSnack = false;
-                }
-                else {
-                    switchSnack.setBackground(Color.GREEN);
-                    switchSnack.setText("  O  ");
-                    toggleSnack = true;
-                }
-            }
-        });
+//        switchSnack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(e.getActionCommand().contentEquals("  O  ")) {
+//                    switchSnack.setBackground(Color.RED);
+//                    switchSnack.setText("  X  ");
+//                    toggleSnack = false;
+//                }
+//                else {
+//                    switchSnack.setBackground(Color.GREEN);
+//                    switchSnack.setText("  O  ");
+//                    toggleSnack = true;
+//                }
+//            }
+//        });
         JLabel snackLab = new JLabel("Snack Break Reminder");
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 4 ;
@@ -407,27 +410,28 @@ public class TabSettings extends JComponent {
         JPanel panBreath = new JPanel();
         panBreath.setLayout(new GridLayout());
 
-        JButton switchBreath = new JButton("  X  ");
-        switchBreath.setBackground(Color.RED);
+        JCheckBox switchBreath = new JCheckBox("<html></html>", true);
+//        JButton switchBreath = new JButton("  X  ");
+//        switchBreath.setBackground(Color.RED);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 5 ;
         Titles.add(switchBreath,c);
 
-        switchBreath.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getActionCommand().contentEquals("  O  ")) {
-                    switchBreath.setBackground(Color.RED);
-                    switchBreath.setText("  X  ");
-                    toggleBreath = false;
-                }
-                else {
-                    switchBreath.setBackground(Color.GREEN);
-                    switchBreath.setText("  O  ");
-                    toggleBreath = true;
-                }
-            }
-        });
+//        switchBreath.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(e.getActionCommand().contentEquals("  O  ")) {
+//                    switchBreath.setBackground(Color.RED);
+//                    switchBreath.setText("  X  ");
+//                    toggleBreath = false;
+//                }
+//                else {
+//                    switchBreath.setBackground(Color.GREEN);
+//                    switchBreath.setText("  O  ");
+//                    toggleBreath = true;
+//                }
+//            }
+//        });
         JLabel breathLab = new JLabel(" Breath Break Reminder ");
 
         c.gridwidth = 1;
