@@ -50,7 +50,7 @@ public class PanelTabs extends JTabbedPane {
     /**
      * Creates a panel with tabs on top that represent each screen of the desktop app
      */
-    public PanelTabs(InterfacePopUpBreak interfacePopUpBreak) throws IOException {
+    public PanelTabs(InterfacePopUpBreak interfacePopUpBreak) {
 
         // Initialize attributes
         this.interfacePopUpBreak = interfacePopUpBreak;
@@ -72,7 +72,7 @@ public class PanelTabs extends JTabbedPane {
         ImageIcon settingsIcon = new ImageIcon(getClass().getResource("/icons/settings.png"));
         addTab("Settings", settingsIcon, tabSettings,"To tweak the reminders");
 
-        tabTimeToBreak = new TabTimeToBreak();
+        tabTimeToBreak = new TabTimeToBreak(this.interfacePopUpBreak);
         ImageIcon timerIcon = new ImageIcon(getClass().getResource("/icons/timer.png"));
         addTab("01:05 min left until you next break", timerIcon, tabTimeToBreak,"To tweak the reminders");
 
@@ -87,4 +87,8 @@ public class PanelTabs extends JTabbedPane {
     // -----------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------
+
+    public void switchToLearnMore() {
+        this.setSelectedIndex(2);
+    }
 }

@@ -12,8 +12,15 @@ import static com.designproject.utils.ImageUtils.resizeIcon;
 public class TabTimeToBreak extends JComponent implements ActionListener {
 
     // -----------------------------------------------------------------
+    // Constants
+    // -----------------------------------------------------------------
+    private final static String ADD_WATER = "ADD_WATER";
+    private final static String LEARN_MORE = "LEARN_MORE";
+
+    // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
+    InterfacePopUpBreak interfacePopUpBreak;
     JPanel panelRight;
     JPanel panelLeft;
     AbstractBorder bubbleBorder;
@@ -26,9 +33,10 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
     /**
      * Creates a panel with tabs on top that represent each screen of the desktop app
      */
-    public TabTimeToBreak() {
+    public TabTimeToBreak(InterfacePopUpBreak interfacePopUpBreak) {
 
         // Initialize attributes
+        this.interfacePopUpBreak = interfacePopUpBreak;
         panelLeft = new JPanel(new BorderLayout());
         panelRight = new JPanel(new GridBagLayout());
         bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
@@ -74,6 +82,7 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
 
         JButton buttonGlass = new JButton("+1 glass");
         buttonGlass.addActionListener(this);
+        buttonGlass.setActionCommand(ADD_WATER);
         c.fill = GridBagConstraints.NONE;
         c.gridx = 1;
         c.gridy = 1;
@@ -84,6 +93,7 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
 
         JButton buttonBottle = new JButton("+1 bottle");
         buttonBottle.addActionListener(this);
+        buttonBottle.setActionCommand(ADD_WATER);
         c.fill = GridBagConstraints.NONE;
         c.gridx = 2;
         c.gridy = 1;
@@ -94,6 +104,7 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
 
         JButton buttonLiter = new JButton("+1 liter");
         buttonLiter.addActionListener(this);
+        buttonLiter.setActionCommand(ADD_WATER);
         c.fill = GridBagConstraints.NONE;
         c.gridx = 3;
         c.gridy = 1;
@@ -110,8 +121,13 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
     // -----------------------------------------------------------------
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        incrementWater();
-        showMoreMessages();
+        String command = actionEvent.getActionCommand();
+        if (ADD_WATER.equals(command)) {
+            incrementWater();
+            showMoreMessages();
+        } else if (LEARN_MORE.equals(command)) {
+            interfacePopUpBreak.switchToLearnMore();
+        }
     }
 
     private void incrementWater() {
@@ -135,30 +151,30 @@ public class TabTimeToBreak extends JComponent implements ActionListener {
         c.gridy = 4;
         c.gridwidth = 4;
         c.ipady = 20;
-        c.insets = new Insets(20,20,40,20);
+        c.insets = new Insets(20,20,10,20);
         panelRight.add(waterBreakLabel2, c);
 
-//        // bottom panel buttons
-//        JButton button_yes = new JButton("Sure!");
-//        JButton button_no = new JButton("Maybe later...");
-//
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.weightx = 0.5;
-//        c.gridx = 0;
-//        c.gridy = 2;
-//        c.gridwidth = 1;
-//        c.ipady = 10;
-//        c.insets = new Insets(50,10,10,10);
-//        panelRight.add(button_yes, c);
-//
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.weightx = 0.5;
-//        c.gridx = 1;
-//        c.gridy = 2;
-//        c.ipady = 10;
-//        c.insets = new Insets(50,10,10,10);
-//        panelRight.add(button_no, c);
+        // bottom panel buttons
+        JButton buttonSure = new JButton("Sure!");
+        JButton buttonLater = new JButton("Maybe later...");
 
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 5;
+        c.gridwidth = 2;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonSure, c);
+
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 5;
+        c.gridwidth = 2;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonLater, c);
     }
 
 }
