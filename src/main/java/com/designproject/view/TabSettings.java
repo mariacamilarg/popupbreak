@@ -90,22 +90,25 @@ public class TabSettings extends JComponent {
         JLabel ONOFF = new JLabel("  ON/OFF  ");
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 0 ;
+        c.weightx = 0.5;
         Titles.add(ONOFF,c);
 
         JLabel reminder = new JLabel("  Reminder  ");
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 0 ;
+        c.weightx = 0.5;
         Titles.add(reminder,c);
 
         JLabel Frequency = new JLabel("  Frequency  ");
         c.gridwidth = 5;
         c.gridx = 2; c.gridy= 0 ;
+        c.weightx = 0.5;
         Titles.add(Frequency,c);
 
         JLabel AmountDuration = new JLabel("  Amount/Duration  ");
         c.gridwidth = 2;
         c.gridx = 7; c.gridy= 0;
-
+        c.weightx = 0.5;
 
         Titles.add(AmountDuration,c);
 //
@@ -547,7 +550,7 @@ public class TabSettings extends JComponent {
         JButton saveButton = new JButton("Save");
 
         c.gridwidth = 2;
-        c.gridx = 6; c.gridy= 7 ;
+        c.gridx = 7; c.gridy= 7 ;
         Titles.add(saveButton,c);
 
 
