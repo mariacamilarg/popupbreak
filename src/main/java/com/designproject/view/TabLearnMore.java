@@ -1,16 +1,8 @@
 package com.designproject.view;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.AbstractBorder;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -123,10 +115,19 @@ public class TabLearnMore extends JPanel implements ActionListener {
 
         setLayout(new GridLayout(2,3));
 
-        JLabel pic = new JLabel(resizeIcon(
-                new ImageIcon(getClass().getResource("/images/water.png")), 236, 240));
+        JLabel waterLabel = labelWithIconOnTop("Drinking Habits", new ImageIcon(getClass().getResource("/images/water.png")));
+        JLabel sleepLavel = labelWithIconOnTop("Sleeping Habits", new ImageIcon(getClass().getResource("/images/sleeping.jpg")));
+        JLabel breakLabel = labelWithIconOnTop("Perfect Breaks", new ImageIcon(getClass().getResource("/images/break.jpg")));
+        JLabel eyeLabel = labelWithIconOnTop("Eyes Excercises", new ImageIcon(getClass().getResource("/images/eye.jpg")));
+        JLabel eatLabel = labelWithIconOnTop("Eating Habits", new ImageIcon(getClass().getResource("/images/eating.jpg")));
+        JLabel exerciseLabel = labelWithIconOnTop("Exercises", new ImageIcon(getClass().getResource("/images/exercise.jpg")));
 
-        // finish this TODO...
+        add(waterLabel);
+        add(sleepLavel);
+        add(breakLabel);
+        add(eyeLabel);
+        add(eatLabel);
+        add(exerciseLabel);
 
         revalidate();
         repaint();
@@ -135,5 +136,14 @@ public class TabLearnMore extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         learnMoreHabits();
+    }
+
+    public JLabel labelWithIconOnTop(String text, ImageIcon icon) {
+        ImageIcon imageIcon = resizeIcon(icon, 200, 150);
+        JLabel label = new JLabel(imageIcon);
+        label.setText(text);
+        label.setHorizontalTextPosition(JLabel.CENTER);
+        label.setVerticalTextPosition(JLabel.BOTTOM);
+        return label;
     }
 }
