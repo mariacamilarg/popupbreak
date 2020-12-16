@@ -9,14 +9,16 @@ import java.awt.BorderLayout;
 import java.awt.geom.Area;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 
-public class TabHome extends JComponent {
+public class TabHome extends JPanel {
 
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
-
+    JPanel panelRight;
+    JPanel panelLeft;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -29,78 +31,72 @@ public class TabHome extends JComponent {
 
         // Initialize attributes
 
+        // Set style
+        setBackground(Color.WHITE);
 
         // Set layout
         setLayout(new BorderLayout());
 
-        JPanel panel_right = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        // Left panel
+        panelLeft = new JPanel(new BorderLayout());
+        panelLeft.setBackground(Color.WHITE);
+        URL url = getClass().getResource("/animations/hello.gif");
+        panelLeft.add(new JLabel(new ImageIcon(url)), BorderLayout.CENTER);
+        add(panelLeft, BorderLayout.CENTER);
 
-        //panel_right.setMaximumSize( new Dimension(  10, 10) );
+        // Right panel
+        panelRight = new JPanel(new GridBagLayout());
+        panelRight.setBackground(Color.WHITE);
 
-        JLabel welcome1 = new JLabel();
-        JLabel welcome2 = new JLabel();
-
-        welcome1.setText("<html>Hi Lucy!<br/> Welcome to a beautiful new day :)<br/> <br/>" +
+        JLabel welcome1 = new JLabel(
+                "<html>Hi Lucy!<br/> Welcome to a beautiful new day :)<br/> <br/>" +
                 "You can see our planned agenda for today in the right pane</html>");
+        JLabel welcome2 = new JLabel(
+                "<html>You still have some time until you 9am meeting, let's start<br/> " +
+                "the day with some breathing exercises!<html>");
 
-        welcome2.setText("<html>You still have some time until you 9am meeting, let's start<br/> " +
-                "the day with some breathing excercises!<html>");
+        AbstractBorder bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
+        welcome1.setBorder(bubbleBorder);
+        welcome2.setBorder(bubbleBorder);
 
-
-
-        AbstractBorder brdrLeft = new TextBubbleBorder(Color.BLACK,2,16,16);
-        welcome1.setBorder(brdrLeft);
-        welcome2.setBorder(brdrLeft);
-
-
+        GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        c.ipady = 60;
-        c.insets = new Insets(10,5,50,5);
-        panel_right.add(welcome1, c);
+        c.ipady = 20;
+        c.insets = new Insets(20,20,40,20);
+        panelRight.add(welcome1, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
-        c.ipady = 50;
-        c.insets = new Insets(30,5,50,5);
-        panel_right.add(welcome2, c);
-
-
+        c.ipady = 20;
+        c.insets = new Insets(20,20,40,20);
+        panelRight.add(welcome2, c);
 
         JButton button_yes = new JButton("Sure!");
         JButton button_no = new JButton("Maybe later...");
 
-
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 1;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panel_right.add(button_yes, c);
+        panelRight.add(button_yes, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 2;
+        c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panel_right.add(button_no, c);
+        panelRight.add(button_no, c);
 
-
-        add(panel_right, BorderLayout.EAST);
-
-
-
-
-
-
-
+        add(panelRight, BorderLayout.EAST);
     }
 
     // -----------------------------------------------------------------

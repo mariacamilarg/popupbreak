@@ -3,6 +3,7 @@ package com.designproject.view;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -45,17 +46,23 @@ public class InterfacePopUpBreak extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
 
+        // Set style
+        setBackground(Color.WHITE);
+
         // Layout and panels setup
         setLayout(new BorderLayout());
 
         panelTabs = new PanelTabs(this);
+        panelTabs.setBackground(Color.WHITE);
         add(panelTabs, BorderLayout.CENTER);
 
         panelAgenda = new PanelAgenda(this);
+        panelAgenda.setBackground(new Color(200, 221, 242));
         add(panelAgenda, BorderLayout.EAST);
 
         // Pop up handler
         dialogPopUp = new DialogPopUp(this);
+        dialogPopUp.setBackground(Color.WHITE);
         timerChecker();
     }
 
@@ -78,6 +85,10 @@ public class InterfacePopUpBreak extends JFrame {
 //        if (result != null) {
 //            JOptionPane.showMessageDialog(this, "res: " + result);
 //        }
+    }
+
+    public void switchToLearnMore() {
+        panelTabs.switchToLearnMore();
     }
 
 
