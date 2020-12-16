@@ -36,12 +36,12 @@ public class PanelAgenda extends JPanel {
 
         // Initialize day commitments
         ArrayList<JCheckBox> dayCommitments = new ArrayList<>();
-        dayCommitments.add(new JCheckBox("<html>9.00 - 10.00 <br> Team meeting</html>"));
-        dayCommitments.add(new JCheckBox("<html>10.30 - 10.35 <br> Drink water</html>"));
-        dayCommitments.add(new JCheckBox("<html>12.00 - 13.00 <br> Lunch</html>"));
-        dayCommitments.add(new JCheckBox("<html>14.00 - 16.00 <br> Assignments</html>"));
-        dayCommitments.add(new JCheckBox("<html>16.00 - 16.30 <br> Healthy snack <br> Move excercise</html>"));
-        dayCommitments.add(new JCheckBox("<html>17.30 - 17.35 <br> Eye break</html>"));
+        dayCommitments.add(new JCheckBox("<html>9.00 - 10.00 <br> Team meeting</html>", true));
+        dayCommitments.add(new JCheckBox("<html>10.30 - 10.35 <br> Drink water</html>", true));
+        dayCommitments.add(new JCheckBox("<html>12.00 - 13.00 <br> Lunch</html>", true));
+        dayCommitments.add(new JCheckBox("<html>14.00 - 16.00 <br> Assignments</html>", true));
+        dayCommitments.add(new JCheckBox("<html>16.00 - 16.30 <br> Healthy snack <br> Move exercise</html>", true));
+        dayCommitments.add(new JCheckBox("<html>17.30 - 17.35 <br> Eye break</html>", true));
 
         // Add day commitments to panel
         for (int i = 0; i < dayCommitments.size(); i++) {
