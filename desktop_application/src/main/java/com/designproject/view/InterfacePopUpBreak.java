@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 public class InterfacePopUpBreak extends JFrame {
 
@@ -35,7 +36,7 @@ public class InterfacePopUpBreak extends JFrame {
     /**
      * Creates the interface by adding its panels
      */
-    public InterfacePopUpBreak() {
+    public InterfacePopUpBreak() throws IOException {
 
         // General setup
         setTitle("PopUpBreak");
