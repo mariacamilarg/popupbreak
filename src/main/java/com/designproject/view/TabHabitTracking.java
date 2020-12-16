@@ -39,7 +39,7 @@ public class TabHabitTracking extends JComponent {
 //        ImageIcon imageIcon = new ImageIcon(new ImageIcon
 //                (getClass().getResource("/plots/day.png")).
 //                getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH));
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/plots/day.png"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/images/day.png"));
         JLabel picLabel = new JLabel();
         picLabel.setIcon(imageIcon);
         picLabel.setForeground(Color.white);
