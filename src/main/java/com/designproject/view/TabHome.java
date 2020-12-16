@@ -17,8 +17,8 @@ public class TabHome extends JPanel {
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
-    JPanel panel_right;
-    JPanel panel_left;
+    JPanel panelRight;
+    JPanel panelLeft;
 
     // -----------------------------------------------------------------
     // Constructors
@@ -38,15 +38,15 @@ public class TabHome extends JPanel {
         setLayout(new BorderLayout());
 
         // Left panel
-        panel_left = new JPanel(new BorderLayout());
-        panel_left.setBackground(Color.WHITE);
+        panelLeft = new JPanel(new BorderLayout());
+        panelLeft.setBackground(Color.WHITE);
         URL url = getClass().getResource("/animations/hello.gif");
-        panel_left.add(new JLabel(new ImageIcon(url)), BorderLayout.CENTER);
-        add(panel_left, BorderLayout.CENTER);
+        panelLeft.add(new JLabel(new ImageIcon(url)), BorderLayout.CENTER);
+        add(panelLeft, BorderLayout.CENTER);
 
         // Right panel
-        panel_right = new JPanel(new GridBagLayout());
-        panel_right.setBackground(Color.WHITE);
+        panelRight = new JPanel(new GridBagLayout());
+        panelRight.setBackground(Color.WHITE);
 
         JLabel welcome1 = new JLabel(
                 "<html>Hi Lucy!<br/> Welcome to a beautiful new day :)<br/> <br/>" +
@@ -66,7 +66,7 @@ public class TabHome extends JPanel {
         c.gridwidth = 2;
         c.ipady = 20;
         c.insets = new Insets(20,20,40,20);
-        panel_right.add(welcome1, c);
+        panelRight.add(welcome1, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -74,7 +74,7 @@ public class TabHome extends JPanel {
         c.gridwidth = 2;
         c.ipady = 20;
         c.insets = new Insets(20,20,40,20);
-        panel_right.add(welcome2, c);
+        panelRight.add(welcome2, c);
 
         JButton button_yes = new JButton("Sure!");
         JButton button_no = new JButton("Maybe later...");
@@ -86,7 +86,7 @@ public class TabHome extends JPanel {
         c.gridwidth = 1;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panel_right.add(button_yes, c);
+        panelRight.add(button_yes, c);
 
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
@@ -94,9 +94,9 @@ public class TabHome extends JPanel {
         c.gridy = 2;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panel_right.add(button_no, c);
+        panelRight.add(button_no, c);
 
-        add(panel_right, BorderLayout.EAST);
+        add(panelRight, BorderLayout.EAST);
     }
 
     // -----------------------------------------------------------------

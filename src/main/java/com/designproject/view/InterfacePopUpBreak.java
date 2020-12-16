@@ -53,13 +53,16 @@ public class InterfacePopUpBreak extends JFrame {
         setLayout(new BorderLayout());
 
         panelTabs = new PanelTabs(this);
+        panelTabs.setBackground(Color.WHITE);
         add(panelTabs, BorderLayout.CENTER);
 
         panelAgenda = new PanelAgenda(this);
+        panelAgenda.setBackground(new Color(200, 221, 242));
         add(panelAgenda, BorderLayout.EAST);
 
         // Pop up handler
         dialogPopUp = new DialogPopUp(this);
+        dialogPopUp.setBackground(Color.WHITE);
         timerChecker();
     }
 

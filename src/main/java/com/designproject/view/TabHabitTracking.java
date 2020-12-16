@@ -4,15 +4,35 @@ import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 
-public class TabHabitTracking extends JComponent {
+import static com.designproject.utils.ImageUtils.resizeIcon;
 
-    public TabHabitTracking() throws IOException {
+public class TabHabitTracking extends JPanel {
+
+    // -----------------------------------------------------------------
+    // Attributes
+    // -----------------------------------------------------------------
+
+    JPanel panelTop;
+    JPanel panelRight;
+
+    // -----------------------------------------------------------------
+    // Constructors
+    // -----------------------------------------------------------------
+
+    public TabHabitTracking() {
+        // Set layout
         setLayout(new BorderLayout());
-        JPanel panel_top = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        //Buttons on the top for today, week and month
+        // Set style
+        setBackground(Color.WHITE);
+
+        // Panel top: buttons on the top for today, week and month
+        panelTop = new JPanel(new GridBagLayout());
+        panelTop.setBackground(Color.WHITE);
+
         JButton button_today = new JButton("TODAY'S SUMMARY");
         button_today.setBackground(Color.WHITE);
         JButton button_week = new JButton("WEEKLY");
@@ -24,31 +44,27 @@ public class TabHabitTracking extends JComponent {
         c.gridy = 0;
         c.ipady = 10;
         c.insets = new Insets(10,0,10,0);
-        panel_top.add(button_today, c);
+        panelTop.add(button_today, c);
         c.gridx = 1;
         c.gridy = 0;
-        panel_top.add(button_week, c);
+        panelTop.add(button_week, c);
         c.gridx = 2;
         c.gridy = 0;
-        panel_top.add(button_month, c);
+        panelTop.add(button_month, c);
 
-        add(panel_top, BorderLayout.NORTH);
+        add(panelTop, BorderLayout.NORTH);
 
-
-        // image adding on the left
-//        ImageIcon imageIcon = new ImageIcon(new ImageIcon
-//                (getClass().getResource("/plots/day.png")).
-//                getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH));
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/images/day.png"));
-        JLabel picLabel = new JLabel();
-        picLabel.setIcon(imageIcon);
+        // Pic left: image adding on the left
+        JLabel picLabel = new JLabel(resizeIcon(
+                new ImageIcon(getClass().getResource("/images/day.png")), 482, 541));
         picLabel.setForeground(Color.white);
         picLabel.setBackground(Color.white);
         picLabel.setOpaque(true);
         add(picLabel, BorderLayout.CENTER);
 
-        // description on the right
-        JPanel panel_right = new JPanel(new GridBagLayout());
+        // Panel right: description on the right
+        panelRight = new JPanel(new GridBagLayout());
+        panelRight.setBackground(Color.WHITE);
 
         JLabel congrats1 = new JLabel();
         congrats1.setText("<html>You are doing great progress! Keep it up!<br/> " +
@@ -59,23 +75,31 @@ public class TabHabitTracking extends JComponent {
                 "You may click the SETTING to do the changes <br/> <br/></html>");
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 2;
         c.insets = new Insets(5,5,5,5);
 
         AbstractBorder brdrLeft = new TextBubbleBorder(Color.BLACK,2,16,16);
         congrats1.setBorder(brdrLeft);
-        //welcome2.setBorder(brdrLeft);
+        panelRight.add(congrats1,c);
 
-        panel_right.add(congrats1,c);
-
-        JButton button_setting = new JButton("SETTING");
         c.gridx = 0;
         c.gridy = 1;
-        panel_right.add(button_setting,c);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(5,5,5,5);
+        URL url = getClass().getResource("/animations/happy-with-hands.gif");
+        panelRight.add(new JLabel(new ImageIcon(url)), c);
 
-        add(panel_right, BorderLayout.EAST);
+        JButton buttonSettings = new JButton("Settings");
+        c.gridx = 1;
+        c.gridy = 1;
+        c.fill = GridBagConstraints.NONE;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(5,5,5,5);
+        panelRight.add(buttonSettings, c);
 
-
-
+        add(panelRight, BorderLayout.EAST);
     }
-
 }

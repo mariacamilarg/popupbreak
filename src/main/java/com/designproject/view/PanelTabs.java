@@ -55,9 +55,6 @@ public class PanelTabs extends JTabbedPane {
         // Initialize attributes
         this.interfacePopUpBreak = interfacePopUpBreak;
 
-        // Set style
-        setBackground(Color.WHITE);
-
         // Set layout
         tabHome = new TabHome();
         ImageIcon homeIcon = new ImageIcon(getClass().getResource("/icons/home.png"));
@@ -78,6 +75,13 @@ public class PanelTabs extends JTabbedPane {
         tabTimeToBreak = new TabTimeToBreak();
         ImageIcon timerIcon = new ImageIcon(getClass().getResource("/icons/timer.png"));
         addTab("01:05 min left until you next break", timerIcon, tabTimeToBreak,"To tweak the reminders");
+
+        // Set style
+        setBackground(Color.WHITE);
+        for (int i = 0; i < this.getTabCount(); i++) {
+            this.setBackgroundAt(i, Color.WHITE);
+            this.getComponentAt(i).setBackground(Color.WHITE);
+        }
     }
 
     // -----------------------------------------------------------------
