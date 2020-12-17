@@ -2,13 +2,17 @@ package com.designproject.view;
 
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import static com.designproject.utils.ButtonCommands.ADD;
 import static com.designproject.utils.ButtonCommands.BUSY;
 import static com.designproject.utils.ButtonCommands.LAZY;
 import static com.designproject.utils.ButtonCommands.NORMAL;
+import static com.designproject.utils.ImageUtils.resizeIcon;
 
 public class TabSettings extends JComponent implements ActionListener{
 
@@ -72,7 +76,7 @@ public class TabSettings extends JComponent implements ActionListener{
 
         // Initialize attributes
         settingsControls = new JPanel();
-        panelVC = new JPanel();
+        panelVC = new JPanel(new GridBagLayout());
 
         // Layout
         setLayout(new BorderLayout());
@@ -82,19 +86,64 @@ public class TabSettings extends JComponent implements ActionListener{
 //        add(label,BorderLayout.NORTH);
 
         // East panel
-        panelVC.setLayout(new BoxLayout(panelVC, BoxLayout.Y_AXIS));
+        //panelVC.setBackground(Color.WHITE);
+        GridBagConstraints vcConstraints = new GridBagConstraints();
+        AbstractBorder brdrLeft = new TextBubbleBorder(Color.BLACK,2,16,16);
+
+        JLabel select = new JLabel("<html>You can also select from<br>" +
+                " our default configurations<br/>" +
+                " or your custom ones:</html>");
+        //select.setBackground(Color.WHITE);
+        select.setBorder(brdrLeft);
+        vcConstraints.fill = GridBagConstraints.HORIZONTAL;
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 0;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(select, vcConstraints);
+
+        URL url = getClass().getResource("/animations/wink.gif");
+        vcConstraints.fill = GridBagConstraints.VERTICAL;
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 1;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(new JLabel(new ImageIcon(url)), vcConstraints);
+
         buttonLazy = new JButton("  Lazy Day   ");
         buttonLazy.addActionListener(this);
         buttonLazy.setActionCommand(LAZY);
-        panelVC.add(buttonLazy);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 2;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonLazy, vcConstraints);
+
         buttonBusy = new JButton("  Busy Day  ");
         buttonBusy.addActionListener(this);
         buttonBusy.setActionCommand(BUSY);
-        panelVC.add(buttonBusy);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 3;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonBusy, vcConstraints);
+
         buttonNormal = new JButton("  Normal Day  ");
         buttonNormal.addActionListener(this);
         buttonNormal.setActionCommand(NORMAL);
-        panelVC.add(buttonNormal);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 4;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonNormal, vcConstraints);
+
         add(panelVC, BorderLayout.EAST);
 
         // Center panel
@@ -108,7 +157,7 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 0 ;
         c.weightx = 0.5;
-        c.weighty = 0.5;
+        c.weighty = 0.1;
         Titles.add(ONOFF,c);
 
         JLabel reminder = new JLabel("  Reminder  ");
@@ -139,7 +188,9 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridx = 0; c.gridy= 1 ;
         Titles.add(switchWater,c);
 
-        JLabel waterLab = new JLabel("  Water Reminder  ");
+        JLabel waterLab = new JLabel("  Water  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/water.png")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 1 ;
         Titles.add(waterLab,c);
@@ -192,7 +243,9 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 2 ;
         Titles.add(switchExercise,c);
-        JLabel exerciseLab = new JLabel("  Exercise Reminder  ");
+        JLabel exerciseLab = new JLabel("  Exercise  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/exercise.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 2 ;
         Titles.add(exerciseLab,c);
@@ -236,7 +289,9 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 3 ;
         Titles.add(switchEye,c);
-        JLabel eyeLab = new JLabel("  Eye Break Reminder  ");
+        JLabel eyeLab = new JLabel("  Eye Breaks  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/eye.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 3 ;
         Titles.add(eyeLab,c);
@@ -287,7 +342,9 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 4 ;
         Titles.add(switchSnack,c);
-        JLabel snackLab = new JLabel("Snack Break Reminder");
+        JLabel snackLab = new JLabel("  Snacking  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/eating.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 4 ;
         Titles.add(snackLab,c);
@@ -340,7 +397,9 @@ public class TabSettings extends JComponent implements ActionListener{
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 5 ;
         Titles.add(switchBreath,c);
-        JLabel breathLab = new JLabel(" Breath Break Reminder ");
+        JLabel breathLab = new JLabel("  Breathing  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/breathing.png")), 80, 80
+        ), JLabel.CENTER);
 
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 5 ;
@@ -397,47 +456,12 @@ public class TabSettings extends JComponent implements ActionListener{
         JPanel buttonControls = new JPanel();
         buttonControls.setLayout(new GridLayout());
         JButton customReminderAdd = new JButton("+");
-        customReminderAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame form = new JFrame();
-                form.setSize(200,200);
-                form.setTitle("Reminder Creation in progress");
-
-                JPanel panny  = new JPanel();
-                panny.setLayout(new BoxLayout(panny, BoxLayout.Y_AXIS));
-
-                JLabel nameReminder = new JLabel("  Reminder's name  " );
-                JTextField reminder = new JTextField(50);
-                JLabel amountReminder = new JLabel("  Amount  " );
-                JTextField amountreminder = new JTextField(10);
-                JButton createButton = new JButton("  Create Reminder  ");
-                createButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        newReminderCustom((String) reminder.getText(), amountreminder.getText());
-                        form.setVisible(false);
-                    }
-                });
-
-                panny.add(nameReminder);
-                panny.add(reminder);
-                panny.add(amountReminder);
-                panny.add(amountreminder);
-                panny.add(createButton);
-
-                form.add(panny);
-
-                form.pack();
-                form.setVisible(true);
-
-            }
-        });
+        customReminderAdd.addActionListener(this);
+        customReminderAdd.setActionCommand(ADD);
 
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 7;
         Titles.add(customReminderAdd,c);
-
 
         JButton cancelButton = new JButton("Cancel");
 
@@ -538,7 +562,8 @@ public class TabSettings extends JComponent implements ActionListener{
 
             exercisemin.setText("  45  ");
             exercisemin.repaint();
-        } else if (BUSY.equals(command)) {
+        }
+        else if (BUSY.equals(command)) {
             breathAmount.setText("  20  ");
             breathAmount.repaint();
 
@@ -562,7 +587,8 @@ public class TabSettings extends JComponent implements ActionListener{
 
             exerciseHour.setText("  02  ");
             exerciseHour.repaint();
-        } else if (NORMAL.equals(command)) {
+        }
+        else if (NORMAL.equals(command)) {
             breathAmount.setText("  59  ");
             breathAmount.repaint();
 
@@ -586,6 +612,43 @@ public class TabSettings extends JComponent implements ActionListener{
 
             exercisemin.setText("  55  ");
             exercisemin.repaint();
+        }
+        else if (ADD.equals(command)) {
+            JDialog form = new JDialog();
+            form.setSize(100,200);
+            form.setTitle("New reminder");
+
+            JPanel panny  = new JPanel();
+            panny.setLayout(new GridLayout(7,1));
+
+            JLabel nameReminder = new JLabel("  Name  " );
+            JTextField reminder = new JTextField("Social break");
+            JLabel freqReminder = new JLabel("  Frequency  " );
+            JTextField frequency = new JTextField("02:30:00");
+            JLabel amountReminder = new JLabel("  Amount  " );
+            JTextField amountreminder = new JTextField("10min");
+            JButton createButton = new JButton("  Create Reminder  ");
+            createButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //newReminderCustom((String) reminder.getText(), amountreminder.getText());
+                    form.setVisible(false);
+                }
+            });
+
+            panny.add(nameReminder);
+            panny.add(reminder);
+            panny.add(freqReminder);
+            panny.add(frequency);
+            panny.add(amountReminder);
+            panny.add(amountreminder);
+            panny.add(createButton);
+
+            form.add(panny);
+
+            form.pack();
+            form.setLocationRelativeTo(this);
+            form.setVisible(true);
         }
 
         repaint();

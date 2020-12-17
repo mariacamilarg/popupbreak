@@ -14,6 +14,7 @@ public class ButtonCommands {
     public final static String LAZY = "LAZY";
     public final static String BUSY = "BUSY";
     public final static String NORMAL = "NORMAL";
+    public final static String ADD = "ADD";
 
     public final static String YES = "yes";
     public final static String LATER = "later";
