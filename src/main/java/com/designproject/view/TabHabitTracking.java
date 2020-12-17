@@ -3,25 +3,32 @@ package com.designproject.view;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
 import static com.designproject.utils.ImageUtils.resizeIcon;
 
-public class TabHabitTracking extends JPanel {
+public class TabHabitTracking extends JPanel implements ActionListener {
 
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
-
+    InterfacePopUpBreak interfacePopUpBreak;
     JPanel panelTop;
     JPanel panelRight;
 
     // -----------------------------------------------------------------
     // Constructors
     // -----------------------------------------------------------------
+    public TabHabitTracking(InterfacePopUpBreak interfacePopUpBreak) {
 
-    public TabHabitTracking() {
+        // Initialize attributes
+        this.interfacePopUpBreak = interfacePopUpBreak;
+        panelTop = new JPanel(new GridBagLayout());
+        panelRight = new JPanel(new GridBagLayout());
+
         // Set layout
         setLayout(new BorderLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -30,7 +37,6 @@ public class TabHabitTracking extends JPanel {
         setBackground(Color.WHITE);
 
         // Panel top: buttons on the top for today, week and month
-        panelTop = new JPanel(new GridBagLayout());
         panelTop.setBackground(Color.WHITE);
 
         JButton button_today = new JButton("TODAY'S SUMMARY");
@@ -63,16 +69,15 @@ public class TabHabitTracking extends JPanel {
         add(picLabel, BorderLayout.CENTER);
 
         // Panel right: description on the right
-        panelRight = new JPanel(new GridBagLayout());
         panelRight.setBackground(Color.WHITE);
 
         JLabel congrats1 = new JLabel();
         congrats1.setText("<html>You are doing great progress! Keep it up!<br/> " +
                 "The ways you could improve from here could be:<br/> <br/> " +
-                "<ul><li>Implement new habit </li><br/> <br/>  " +
-                "<li>Increase eye breaks</li> <br/>  <br/> " +
-                "<li>Remove water reminders, got them covered!</li><br/></ul>"+
-                "You may click the SETTING to do the changes <br/> <br/></html>");
+                "<ul><li>Implement a new and different habit </li><br/>  " +
+                "<li>Increase your number of eye breaks</li><br/> " +
+                "<li>Remove water reminders, you got them covered!</li><br/></ul>"+
+                "You may also click on Settings to do the changes yourself <br/> <br/></html>");
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
@@ -91,7 +96,8 @@ public class TabHabitTracking extends JPanel {
         URL url = getClass().getResource("/animations/happy-with-hands.gif");
         panelRight.add(new JLabel(new ImageIcon(url)), c);
 
-        JButton buttonSettings = new JButton("Settings");
+        JButton buttonSettings = new JButton("Go to settings");
+        buttonSettings.addActionListener(this);
         c.gridx = 1;
         c.gridy = 1;
         c.fill = GridBagConstraints.NONE;
@@ -101,5 +107,13 @@ public class TabHabitTracking extends JPanel {
         panelRight.add(buttonSettings, c);
 
         add(panelRight, BorderLayout.EAST);
+    }
+
+    // -----------------------------------------------------------------
+    // Methods
+    // -----------------------------------------------------------------
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        interfacePopUpBreak.switchToSettings();
     }
 }

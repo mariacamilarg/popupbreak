@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import static com.designproject.utils.ButtonCommands.LEARN_MORE;
+import static com.designproject.utils.ButtonCommands.MINIMIZE;
 import static com.designproject.utils.ImageUtils.resizeIcon;
 
 public class TabLearnMore extends JPanel implements ActionListener {
@@ -14,6 +16,7 @@ public class TabLearnMore extends JPanel implements ActionListener {
     // -----------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------
+    InterfacePopUpBreak interfacePopUpBreak;
     JPanel panelRight;
     JPanel panelLeft;
     JButton buttonCool;
@@ -22,9 +25,10 @@ public class TabLearnMore extends JPanel implements ActionListener {
     // -----------------------------------------------------------------
     // Constructors
     // -----------------------------------------------------------------
-    public TabLearnMore() {
+    public TabLearnMore(InterfacePopUpBreak interfacePopUpBreak) {
 
         // Initialize attributes
+        this.interfacePopUpBreak = interfacePopUpBreak;
         panelLeft = new JPanel(new BorderLayout());
         panelRight = new JPanel(new GridBagLayout());
         buttonCool = new JButton("Cool!");
@@ -85,6 +89,8 @@ public class TabLearnMore extends JPanel implements ActionListener {
         c.insets = new Insets(20,20,20,20);
         panelRight.add(msg2, c);
 
+        buttonCool.addActionListener(this);
+        buttonCool.setActionCommand(MINIMIZE);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -95,6 +101,7 @@ public class TabLearnMore extends JPanel implements ActionListener {
         panelRight.add(buttonCool, c);
 
         buttonMore.addActionListener(this);
+        buttonMore.setActionCommand(LEARN_MORE);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
@@ -116,14 +123,14 @@ public class TabLearnMore extends JPanel implements ActionListener {
         setLayout(new GridLayout(2,3));
 
         JLabel waterLabel = labelWithIconOnTop("Drinking Habits", new ImageIcon(getClass().getResource("/images/water.png")));
-        JLabel sleepLavel = labelWithIconOnTop("Sleeping Habits", new ImageIcon(getClass().getResource("/images/sleeping.jpg")));
+        JLabel sleepLabel = labelWithIconOnTop("Sleeping Habits", new ImageIcon(getClass().getResource("/images/sleeping.jpg")));
         JLabel breakLabel = labelWithIconOnTop("Perfect Breaks", new ImageIcon(getClass().getResource("/images/break.jpg")));
-        JLabel eyeLabel = labelWithIconOnTop("Eyes Excercises", new ImageIcon(getClass().getResource("/images/eye.jpg")));
+        JLabel eyeLabel = labelWithIconOnTop("Eyes Exercises", new ImageIcon(getClass().getResource("/images/eye.jpg")));
         JLabel eatLabel = labelWithIconOnTop("Eating Habits", new ImageIcon(getClass().getResource("/images/eating.jpg")));
         JLabel exerciseLabel = labelWithIconOnTop("Exercises", new ImageIcon(getClass().getResource("/images/exercise.jpg")));
 
         add(waterLabel);
-        add(sleepLavel);
+        add(sleepLabel);
         add(breakLabel);
         add(eyeLabel);
         add(eatLabel);
@@ -133,11 +140,6 @@ public class TabLearnMore extends JPanel implements ActionListener {
         repaint();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        learnMoreHabits();
-    }
-
     public JLabel labelWithIconOnTop(String text, ImageIcon icon) {
         ImageIcon imageIcon = resizeIcon(icon, 200, 150);
         JLabel label = new JLabel(imageIcon);
@@ -145,5 +147,16 @@ public class TabLearnMore extends JPanel implements ActionListener {
         label.setHorizontalTextPosition(JLabel.CENTER);
         label.setVerticalTextPosition(JLabel.BOTTOM);
         return label;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String command = actionEvent.getActionCommand();
+        if (LEARN_MORE.equals(command)) {
+            interfacePopUpBreak.switchToLearnMore();
+        } else if (MINIMIZE.equals(command)) {
+            interfacePopUpBreak.minimize();
+        }
+        learnMoreHabits();
     }
 }

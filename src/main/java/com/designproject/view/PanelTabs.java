@@ -56,15 +56,15 @@ public class PanelTabs extends JTabbedPane {
         this.interfacePopUpBreak = interfacePopUpBreak;
 
         // Set layout
-        tabHome = new TabHome();
+        tabHome = new TabHome(interfacePopUpBreak);
         ImageIcon homeIcon = new ImageIcon(getClass().getResource("/icons/home.png"));
         addTab("Home", homeIcon, tabHome,"Main view of application");
 
-        tabHabitTracking = new TabHabitTracking();
+        tabHabitTracking = new TabHabitTracking(interfacePopUpBreak);
         ImageIcon habitTrackingIcon = new ImageIcon(getClass().getResource("/icons/tracking.png"));
         addTab("Habit Tracking", habitTrackingIcon, tabHabitTracking,"To view stat summaries");
 
-        tabLearnMore = new TabLearnMore();
+        tabLearnMore = new TabLearnMore(interfacePopUpBreak);
         ImageIcon learnMoreIcon = new ImageIcon(getClass().getResource("/icons/learn.png"));
         addTab("Learn More", learnMoreIcon, tabLearnMore,"To gather more knowledge");
 
@@ -72,7 +72,7 @@ public class PanelTabs extends JTabbedPane {
         ImageIcon settingsIcon = new ImageIcon(getClass().getResource("/icons/settings.png"));
         addTab("Settings", settingsIcon, tabSettings,"To tweak the reminders");
 
-        tabTimeToBreak = new TabTimeToBreak(this.interfacePopUpBreak);
+        tabTimeToBreak = new TabTimeToBreak(interfacePopUpBreak);
         ImageIcon timerIcon = new ImageIcon(getClass().getResource("/icons/timer.png"));
         addTab("01:05 min left until you next break", timerIcon, tabTimeToBreak,"To tweak the reminders");
 
@@ -88,7 +88,24 @@ public class PanelTabs extends JTabbedPane {
     // Methods
     // -----------------------------------------------------------------
 
+    public void switchToHabitTracking() {
+        this.setSelectedIndex(1);
+    }
+
     public void switchToLearnMore() {
         this.setSelectedIndex(2);
     }
+
+    public void switchToSettings() {
+        this.setSelectedIndex(3);
+    }
+
+    public void switchToBreak() {
+        this.setSelectedIndex(4);
+    }
+
+    public void updateTabHome() {
+        tabHome.showEndOfDaySummary();
+    }
+
 }

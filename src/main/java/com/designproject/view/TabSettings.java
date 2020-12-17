@@ -540,13 +540,6 @@ public class TabSettings extends JComponent {
 
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new TabHome();
-                repaint();
-            }
-        });
 
         c.gridwidth = 4;
         c.gridx = 2; c.gridy= 7 ;
