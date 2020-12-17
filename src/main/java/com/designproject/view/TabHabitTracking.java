@@ -91,15 +91,49 @@ public class TabHabitTracking extends JPanel implements ActionListener {
         c.gridy = 1;
         c.fill = GridBagConstraints.VERTICAL;
         c.gridwidth = 1;
+        c.gridheight = 4;
         c.ipady = 10;
         c.insets = new Insets(5,5,5,5);
         URL url = getClass().getResource("/animations/happy-with-hands.gif");
         panelRight.add(new JLabel(new ImageIcon(url)), c);
 
+        JButton buttonImplement = new JButton("Implement new habit");
+        buttonImplement.addActionListener(this);
+        c.gridx = 1;
+        c.gridy = 1;
+        c.fill = GridBagConstraints.NONE;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.ipady = 10;
+        c.insets = new Insets(15,5,5,5);
+        panelRight.add(buttonImplement, c);
+
+        JButton buttonEye = new JButton("Increase eye breaks");
+        buttonEye.addActionListener(this);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.fill = GridBagConstraints.NONE;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.ipady = 10;
+        c.insets = new Insets(5,5,5,5);
+        panelRight.add(buttonEye, c);
+
+        JButton buttonWater = new JButton("Remove water reminders");
+        buttonWater.addActionListener(this);
+        c.gridx = 1;
+        c.gridy = 3;
+        c.fill = GridBagConstraints.NONE;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.ipady = 10;
+        c.insets = new Insets(5,5,5,5);
+        panelRight.add(buttonWater, c);
+
         JButton buttonSettings = new JButton("Go to settings");
         buttonSettings.addActionListener(this);
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 4;
         c.fill = GridBagConstraints.NONE;
         c.gridwidth = 1;
         c.ipady = 10;
