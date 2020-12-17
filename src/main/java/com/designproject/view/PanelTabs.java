@@ -88,6 +88,10 @@ public class PanelTabs extends JTabbedPane {
     // Methods
     // -----------------------------------------------------------------
 
+    public void switchToHabitTracking() {
+        this.setSelectedIndex(1);
+    }
+
     public void switchToLearnMore() {
         this.setSelectedIndex(2);
     }
@@ -103,4 +107,5 @@ public class PanelTabs extends JTabbedPane {
     public void updateTabHome() {
         tabHome.showEndOfDaySummary();
     }
+
 }

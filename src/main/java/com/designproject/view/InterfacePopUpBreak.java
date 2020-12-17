@@ -82,6 +82,10 @@ public class InterfacePopUpBreak extends JFrame {
 
     }
 
+    public void switchToHabitTracking() {
+        panelTabs.switchToHabitTracking();
+    }
+
     public void switchToLearnMore() {
         panelTabs.switchToLearnMore();
     }

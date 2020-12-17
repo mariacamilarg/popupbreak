@@ -13,6 +13,10 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
+import static com.designproject.utils.ButtonCommands.DETAILS;
+import static com.designproject.utils.ButtonCommands.LATER;
+import static com.designproject.utils.ButtonCommands.NICE;
+
 
 public class TabHome extends JPanel implements ActionListener {
 
@@ -91,15 +95,16 @@ public class TabHome extends JPanel implements ActionListener {
         c.insets = new Insets(50,10,10,10);
         panelRight.add(button_yes, c);
 
-        JButton button_no = new JButton("Maybe later...");
-        button_no.addActionListener(this);
+        JButton buttonLater = new JButton("Maybe later...");
+        buttonLater.addActionListener(this);
+        buttonLater.setActionCommand(LATER);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 2;
         c.ipady = 10;
         c.insets = new Insets(50,10,10,10);
-        panelRight.add(button_no, c);
+        panelRight.add(buttonLater, c);
 
         add(panelRight, BorderLayout.EAST);
     }
@@ -110,10 +115,112 @@ public class TabHome extends JPanel implements ActionListener {
 
     public void showEndOfDaySummary() {
         virtualCoach.setIcon(new ImageIcon(getClass().getResource("/animations/happy.gif")));
+
+        panelRight.removeAll();
+        panelRight.setBackground(Color.WHITE);
+
+        AbstractBorder bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
+
+        JLabel summary = new JLabel(
+                "<html>Hey Lucy, today you: <br><br>" +
+                        "<ul><li>\uD83D\uDCBC worked for 8hr 5min</li><br>" +
+                        "<li>\uD83D\uDC41 rested your eyes for 20min</li><br>" +
+                        "<li>\uD83D\uDD7A moved around for 43min</li><br>" +
+                        "<li>\uD83D\uDCA7 drank 1.2lts of water</li><br>" +
+                        "<li>\uD83C\uDF49 ate 1 healthy snack</li></ul><br><br>" +
+                        "Congratulations!                                       \uD83D\uDC4F.</html>");
+        summary.setBorder(bubbleBorder);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        c.ipady = 20;
+        c.insets = new Insets(20,20,20,20);
+        panelRight.add(summary, c);
+
+        JButton buttonNice = new JButton("Nice :D");
+        buttonNice.addActionListener(this);
+        buttonNice.setActionCommand(NICE);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonNice, c);
+
+        JButton buttonDetails = new JButton("See today's details");
+        buttonDetails.addActionListener(this);
+        buttonDetails.setActionCommand(DETAILS);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonDetails, c);
+
+        revalidate();
+        repaint();
+    }
+
+    private void displayFinalMessage() {
+        AbstractBorder bubbleBorder = new TextBubbleBorder(Color.BLACK,2,16,16);
+        JLabel stretches = new JLabel(
+                "<html>Do you wanna do some final streches before heading out?</html>");
+        stretches.setBorder(bubbleBorder);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 2;
+        c.ipady = 20;
+        c.insets = new Insets(20,20,20,20);
+        panelRight.add(stretches, c);
+
+        JButton buttonSure = new JButton("Sure");
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonSure, c);
+
+        JButton buttonNo = new JButton("No, thank you");
+        buttonNo.addActionListener(this);
+        buttonNo.setActionCommand(LATER);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 3;
+        c.gridwidth = 1;
+        c.ipady = 10;
+        c.insets = new Insets(10,10,10,10);
+        panelRight.add(buttonNo, c);
+
+        revalidate();
+        repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        interfacePopUpBreak.minimize();
+        String command = actionEvent.getActionCommand();
+
+        if (LATER.equals(command)) {
+            interfacePopUpBreak.minimize();
+        } else if (NICE.equals(command)) {
+            displayFinalMessage();
+        } else if (DETAILS.equals(command)) {
+            interfacePopUpBreak.switchToHabitTracking();
+            displayFinalMessage();
+        }
+
     }
 }
