@@ -11,6 +11,10 @@ public class ButtonCommands {
     public final static String DETAILS = "DETAILS";
     public final static String NICE = "NICE";
 
+    public final static String LAZY = "LAZY";
+    public final static String BUSY = "BUSY";
+    public final static String NORMAL = "NORMAL";
+
     public final static String YES = "yes";
     public final static String LATER = "later";
     public final static String NO = "no";
