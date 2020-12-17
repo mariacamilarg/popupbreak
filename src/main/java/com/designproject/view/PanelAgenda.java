@@ -50,7 +50,7 @@ public class PanelAgenda extends JPanel {
         JCheckBox jCheckBox1 = new JCheckBox("<html>9.00 - 10.00 <br> Team meeting</html>", true);
         jCheckBox1.setBackground(new Color(200, 221, 242));
         dayCommitments.add(jCheckBox1);
-        JCheckBox jCheckBox2 = new JCheckBox("<html>10.30 - 10.35 <br> Drink water</html>", true);
+        JCheckBox jCheckBox2 = new JCheckBox("<html>10.00 - 10.30 <br> Send report</html>", true);
         jCheckBox2.setBackground(new Color(200, 221, 242));
         dayCommitments.add(jCheckBox2);
         JCheckBox jCheckBox3 = new JCheckBox("<html>10.30 - 10.35 <br> Drink water</html>", true);

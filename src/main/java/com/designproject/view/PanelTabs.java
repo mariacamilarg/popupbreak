@@ -102,6 +102,7 @@ public class PanelTabs extends JTabbedPane {
 
     public void switchToBreak() {
         this.setSelectedIndex(4);
+        this.setTitleAt(4, "Break Time!");
     }
 
     public void updateTabHome() {
