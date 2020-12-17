@@ -2,19 +2,23 @@ package com.designproject.view;
 
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
-public class TabSettings extends JComponent {
+import static com.designproject.utils.ButtonCommands.ADD;
+import static com.designproject.utils.ButtonCommands.BUSY;
+import static com.designproject.utils.ButtonCommands.LAZY;
+import static com.designproject.utils.ButtonCommands.NORMAL;
+import static com.designproject.utils.ImageUtils.resizeIcon;
 
+public class TabSettings extends JComponent implements ActionListener{
 
-    //private final Object SwitchButton;
-    boolean toggleWaterBreak;
-    boolean toggleExercise;
-    boolean toggleEyeExercise;
-    boolean toggleSnack;
-    boolean toggleBreath;
+    // -----------------------------------------------------------------
+    // Attributes
+    // -----------------------------------------------------------------
 
     int hourFrWaterBreak = 00;
     int minFrWaterBreak = 30;
@@ -45,42 +49,104 @@ public class TabSettings extends JComponent {
     int secFrB = 20;
 
     int amountB = 60;
-    //psnel.add(label, BorderLayout.CENTER);
 
-    JPanel settingsControls = new JPanel();
+    boolean toggle = false ;
+
+    JPanel settingsControls;
+    JPanel panelVC;
+
+    JButton buttonLazy;
+    JButton buttonBusy;
+    JButton buttonNormal;
+
+    JTextField breathAmount;
+    JTextField eyeAmount;
+    JTextField breathmin;
+    JTextField eyemin;
+    JTextField snackmin;
+    JTextField snackHour;
+    JTextField exercisemin;
+    JTextField exerciseHour;
+
+    // -----------------------------------------------------------------
+    // Constructor
+    // -----------------------------------------------------------------
 
     public TabSettings(){
 
-//        JButton button = new JButton("here");
-////
-        JPanel psnel = new JPanel();
-        JLabel label = new JLabel("custimization of reminders ");
+        // Initialize attributes
+        settingsControls = new JPanel();
+        panelVC = new JPanel(new GridBagLayout());
 
+        // Layout
         setLayout(new BorderLayout());
 
+        // Title
+//        JLabel label = new JLabel("custimization of reminders ");
+//        add(label,BorderLayout.NORTH);
 
+        // East panel
+        //panelVC.setBackground(Color.WHITE);
+        GridBagConstraints vcConstraints = new GridBagConstraints();
+        AbstractBorder brdrLeft = new TextBubbleBorder(Color.BLACK,2,16,16);
 
-        add(label,BorderLayout.NORTH);
+        JLabel select = new JLabel("<html>You can also select from<br>" +
+                " our default configurations<br/>" +
+                " or your custom ones:</html>");
+        //select.setBackground(Color.WHITE);
+        select.setBorder(brdrLeft);
+        vcConstraints.fill = GridBagConstraints.HORIZONTAL;
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 0;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(select, vcConstraints);
 
-        JPanel settings = new JPanel();
-        JButton Deault1 = new JButton("  Lazy Day   ");
+        URL url = getClass().getResource("/animations/wink.gif");
+        vcConstraints.fill = GridBagConstraints.VERTICAL;
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 1;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(new JLabel(new ImageIcon(url)), vcConstraints);
 
+        buttonLazy = new JButton("  Lazy Day   ");
+        buttonLazy.addActionListener(this);
+        buttonLazy.setActionCommand(LAZY);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 2;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonLazy, vcConstraints);
 
-        JButton Deault2 = new JButton("  Busy Day  ");
+        buttonBusy = new JButton("  Busy Day  ");
+        buttonBusy.addActionListener(this);
+        buttonBusy.setActionCommand(BUSY);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 3;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonBusy, vcConstraints);
 
-        JButton Deault3 = new JButton("  Normal Day  ");
+        buttonNormal = new JButton("  Normal Day  ");
+        buttonNormal.addActionListener(this);
+        buttonNormal.setActionCommand(NORMAL);
+        vcConstraints.gridx = 0;
+        vcConstraints.gridy = 4;
+        vcConstraints.fill = GridBagConstraints.NONE;
+        vcConstraints.gridwidth = 1;
+        vcConstraints.ipady = 10;
+        vcConstraints.insets = new Insets(5,5,5,5);
+        panelVC.add(buttonNormal, vcConstraints);
 
-        settings.setLayout(new BoxLayout(settings,BoxLayout.Y_AXIS));
-        settings.add(Deault1);
-        settings.add(Deault2);
-        settings.add(Deault3);
-        add(settings, BorderLayout.EAST);
+        add(panelVC, BorderLayout.EAST);
 
-
-
-        add(settingsControls,BorderLayout.CENTER);
-
-
+        // Center panel
         settingsControls.setLayout(new BoxLayout(settingsControls,BoxLayout.Y_AXIS));
 
         JPanel Titles = new JPanel();
@@ -91,7 +157,7 @@ public class TabSettings extends JComponent {
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 0 ;
         c.weightx = 0.5;
-        c.weighty = 0.5;
+        c.weighty = 0.1;
         Titles.add(ONOFF,c);
 
         JLabel reminder = new JLabel("  Reminder  ");
@@ -112,37 +178,19 @@ public class TabSettings extends JComponent {
         c.weightx = 0.5;
 
         Titles.add(AmountDuration,c);
-//
         settingsControls.add(Titles);
 
-//
         JPanel panWater = new JPanel();
         panWater.setLayout(new GridLayout(0,9));
-        //panWater.setSize(50,10);
 
         JCheckBox switchWater = new JCheckBox("<html></html>", true);
-//        JButton switchWater = new JButton("  O  ");
-//        switchWater.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 1 ;
         Titles.add(switchWater,c);
 
-//        switchWater.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(e.getActionCommand().contentEquals("  O  ")) {
-//                    switchWater.setBackground(Color.RED);
-//                    switchWater.setText("  X  ");
-//                    toggleWaterBreak = false;
-//                }
-//                else {
-//                    switchWater.setBackground(Color.GREEN);
-//                    switchWater.setText("  O  ");
-//                    toggleWaterBreak = true ;
-//                }
-//            }
-//        });
-        JLabel waterLab = new JLabel("  Water Reminder  ");
+        JLabel waterLab = new JLabel("  Water  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/water.png")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 1 ;
         Titles.add(waterLab,c);
@@ -184,11 +232,6 @@ public class TabSettings extends JComponent {
         Titles.add(waterAmountLab,c);
 
 
-
-
-
-
-
         // end of water tab
 
         JPanel panExercise = new JPanel();
@@ -200,26 +243,13 @@ public class TabSettings extends JComponent {
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 2 ;
         Titles.add(switchExercise,c);
-//        switchExercise.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(e.getActionCommand().contentEquals("  O  ")) {
-//                    switchExercise.setBackground(Color.RED);
-//                    switchExercise.setText("  X  ");
-//                    toggleExercise = false;
-//                }
-//                else {
-//                    switchExercise.setBackground(Color.GREEN);
-//                    switchExercise.setText("  O  ");
-//                    toggleExercise = true;
-//                }
-//            }
-//        });
-        JLabel exerciseLab = new JLabel("  Exercise Reminder  ");
+        JLabel exerciseLab = new JLabel("  Exercise  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/exercise.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 2 ;
         Titles.add(exerciseLab,c);
-        JTextField exerciseHour = new JTextField("  " + hourFrExercise +"  ");
+        exerciseHour = new JTextField("  " + hourFrExercise +"  ");
         c.gridwidth = 1;
         c.gridx = 2; c.gridy= 2 ;
         Titles.add(exerciseHour,c);
@@ -227,7 +257,7 @@ public class TabSettings extends JComponent {
         c.gridwidth = 1;
         c.gridx = 3; c.gridy= 2 ;
         Titles.add(eb1,c);
-        JTextField exercisemin = new JTextField("  " + minFrExercise+ "  ");
+        exercisemin = new JTextField("  " + minFrExercise+ "  ");
         c.gridwidth = 1;
         c.gridx = 4; c.gridy= 2 ;
         Titles.add(exercisemin,c);
@@ -248,11 +278,6 @@ public class TabSettings extends JComponent {
         c.gridx = 8; c.gridy= 2 ;
         Titles.add(exerciseAmountLab,c);
 
-
-
-
-
-
         // end of exercise
 
         //begin eye exercise
@@ -261,27 +286,12 @@ public class TabSettings extends JComponent {
         panEye.setLayout(new GridLayout());
 
         JCheckBox switchEye = new JCheckBox("<html></html>", true);
-//        JButton switchEye = new JButton("  O  ");
-//        switchEye.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 3 ;
         Titles.add(switchEye,c);
-//        switchEye.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(e.getActionCommand().contentEquals("  O  ")) {
-//                    switchEye.setBackground(Color.RED);
-//                    switchEye.setText("  X  ");
-//                    toggleEyeExercise = false;
-//                }
-//                else {
-//                    switchEye.setBackground(Color.GREEN);
-//                    switchEye.setText("  O  ");
-//                    toggleEyeExercise = true;
-//                }
-//            }
-//        });
-        JLabel eyeLab = new JLabel("  Eye Break Reminder  ");
+        JLabel eyeLab = new JLabel("  Eye Breaks  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/eye.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 3 ;
         Titles.add(eyeLab,c);
@@ -296,7 +306,7 @@ public class TabSettings extends JComponent {
         c.gridx = 3; c.gridy= 3 ;
         Titles.add(elb,c);
 
-        JTextField eyemin = new JTextField(" " + minFrEye + "  ");
+        eyemin = new JTextField(" " + minFrEye + "  ");
         c.gridwidth = 1;
         c.gridx = 4; c.gridy= 3 ;
         Titles.add(eyemin,c);
@@ -311,7 +321,7 @@ public class TabSettings extends JComponent {
         c.gridx = 6; c.gridy= 3 ;
         Titles.add(eyesec,c);
 
-        JTextField eyeAmount = new JTextField(" " + amountEye + "  ");
+        eyeAmount = new JTextField(" " + amountEye + "  ");
         c.gridwidth = 1;
         c.gridx = 7; c.gridy= 3 ;
         Titles.add(eyeAmount,c);
@@ -321,13 +331,6 @@ public class TabSettings extends JComponent {
         c.gridx = 8; c.gridy= 3 ;
         Titles.add(eyeAmountLab,c);
 
-
-
-
-
-        //settingsControls.add(Box.createRigidArea(new Dimension(20,0)));
-//        settingsControls.add(panEye);
-
         // end of eye
 
         //begin snack
@@ -336,32 +339,17 @@ public class TabSettings extends JComponent {
         panSnack.setLayout(new GridLayout());
 
         JCheckBox switchSnack = new JCheckBox("<html></html>", true);
-//        JButton switchSnack = new JButton("  O  ");
-//        switchSnack.setBackground(Color.GREEN);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 4 ;
         Titles.add(switchSnack,c);
-//        switchSnack.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(e.getActionCommand().contentEquals("  O  ")) {
-//                    switchSnack.setBackground(Color.RED);
-//                    switchSnack.setText("  X  ");
-//                    toggleSnack = false;
-//                }
-//                else {
-//                    switchSnack.setBackground(Color.GREEN);
-//                    switchSnack.setText("  O  ");
-//                    toggleSnack = true;
-//                }
-//            }
-//        });
-        JLabel snackLab = new JLabel("Snack Break Reminder");
+        JLabel snackLab = new JLabel("  Snacking  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/eating.jpg")), 80, 80
+        ), JLabel.CENTER);
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 4 ;
         Titles.add(snackLab,c);
 
-        JTextField snackHour = new JTextField(" " + hourFrSnack + " ");
+        snackHour = new JTextField(" " + hourFrSnack + " ");
         c.gridwidth = 1;
         c.gridx = 2; c.gridy= 4 ;
         Titles.add(snackHour,c);
@@ -371,7 +359,7 @@ public class TabSettings extends JComponent {
         c.gridx = 3; c.gridy= 4 ;
         Titles.add(b1S,c);
 
-        JTextField snackmin = new JTextField(" " + minFrSnack +" ");
+        snackmin = new JTextField(" " + minFrSnack +" ");
         c.gridwidth = 1;
         c.gridx = 4; c.gridy= 4 ;
         Titles.add(snackmin,c);
@@ -396,43 +384,22 @@ public class TabSettings extends JComponent {
         c.gridx = 8; c.gridy= 4 ;
         Titles.add(snackAmountLab,c);
 
-
-
-
-
         settingsControls.add(panSnack);
 
         // end snack
 
         // begin breathing
 
-
         JPanel panBreath = new JPanel();
         panBreath.setLayout(new GridLayout());
 
         JCheckBox switchBreath = new JCheckBox("<html></html>", true);
-//        JButton switchBreath = new JButton("  X  ");
-//        switchBreath.setBackground(Color.RED);
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 5 ;
         Titles.add(switchBreath,c);
-
-//        switchBreath.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(e.getActionCommand().contentEquals("  O  ")) {
-//                    switchBreath.setBackground(Color.RED);
-//                    switchBreath.setText("  X  ");
-//                    toggleBreath = false;
-//                }
-//                else {
-//                    switchBreath.setBackground(Color.GREEN);
-//                    switchBreath.setText("  O  ");
-//                    toggleBreath = true;
-//                }
-//            }
-//        });
-        JLabel breathLab = new JLabel(" Breath Break Reminder ");
+        JLabel breathLab = new JLabel("  Breathing  ", resizeIcon(
+                new ImageIcon(getClass().getResource("/images/breathing.png")), 80, 80
+        ), JLabel.CENTER);
 
         c.gridwidth = 1;
         c.gridx = 1; c.gridy= 5 ;
@@ -450,7 +417,7 @@ public class TabSettings extends JComponent {
         c.gridx = 3; c.gridy= 5 ;
         Titles.add(br1S,c);
 
-        JTextField breathmin = new JTextField(" " + minFrB + " ");
+        breathmin = new JTextField(" " + minFrB + " ");
 
         c.gridwidth = 1;
         c.gridx = 4; c.gridy= 5 ;
@@ -468,7 +435,7 @@ public class TabSettings extends JComponent {
         c.gridx = 6; c.gridy= 5 ;
         Titles.add(breathsec,c);
 
-        JTextField breathAmount = new JTextField(" " + amountB + " ");
+        breathAmount = new JTextField(" " + amountB + " ");
 
         c.gridwidth = 1;
         c.gridx = 7; c.gridy= 5 ;
@@ -480,10 +447,6 @@ public class TabSettings extends JComponent {
         c.gridx = 8; c.gridy= 5 ;
         Titles.add(breathAmountLab,c);
 
-
-
-
-
         settingsControls.add(panBreath);
 
         // end of breath
@@ -493,51 +456,12 @@ public class TabSettings extends JComponent {
         JPanel buttonControls = new JPanel();
         buttonControls.setLayout(new GridLayout());
         JButton customReminderAdd = new JButton("+");
-        customReminderAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame form = new JFrame();
-                form.setSize(200,200);
-//                form.setPreferredSize(new Dimension(200,200));
-                form.setTitle("Reminder Creation in progress");
-
-                JPanel panny  = new JPanel();
-
-
-                panny.setLayout(new BoxLayout(panny, BoxLayout.Y_AXIS));
-
-
-                JLabel nameReminder = new JLabel("  Reminder's name  " );
-                JTextField reminder = new JTextField(50);
-                JLabel amountReminder = new JLabel("  Amount  " );
-                JTextField amountreminder = new JTextField(10);
-                JButton createButton = new JButton("  Create Reminder  ");
-                createButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        newReminderCustom((String) reminder.getText(), amountreminder.getText());
-                        form.setVisible(false);
-                    }
-                });
-
-                panny.add(nameReminder);
-                panny.add(reminder);
-                panny.add(amountReminder);
-                panny.add(amountreminder);
-                panny.add(createButton);
-
-                form.add(panny);
-
-                form.pack();
-                form.setVisible(true);
-
-            }
-        });
+        customReminderAdd.addActionListener(this);
+        customReminderAdd.setActionCommand(ADD);
 
         c.gridwidth = 1;
         c.gridx = 0; c.gridy= 7;
         Titles.add(customReminderAdd,c);
-
 
         JButton cancelButton = new JButton("Cancel");
 
@@ -551,105 +475,18 @@ public class TabSettings extends JComponent {
         c.gridx = 7; c.gridy= 7 ;
         Titles.add(saveButton,c);
 
-
         settingsControls.add(buttonControls, BOTTOM_ALIGNMENT);
 
-        Deault1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                breathAmount.setText("  30  ");
-                breathAmount.repaint();
+        add(settingsControls, BorderLayout.CENTER);
 
-                eyeAmount.setText("  05  ");
-                eyeAmount.repaint();
-
-                breathmin.setText("  15  ");
-                breathmin.repaint();
-
-                eyemin.setText("  10  ");
-                eyemin.repaint();
-
-                snackmin.setText("  33  ");
-                snackmin.repaint();
-
-                snackHour.setText( "  01  ");
-                snackHour.repaint();
-
-                exercisemin.setText("  45  ");
-                exercisemin.repaint();
-                repaint();
-            }
-        });
-
-        Deault2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                breathAmount.setText("  20  ");
-                breathAmount.repaint();
-
-                eyeAmount.setText("  03  ");
-                eyeAmount.repaint();
-
-                breathmin.setText("  05  ");
-                breathmin.repaint();
-
-                eyemin.setText("  40  ");
-                eyemin.repaint();
-
-                snackmin.setText("  53  ");
-                snackmin.repaint();
-
-                snackHour.setText( "  00  ");
-                snackHour.repaint();
-
-                exercisemin.setText("  55  ");
-                exercisemin.repaint();
-
-                exerciseHour.setText("  02  ");
-                exerciseHour.repaint();
-
-                repaint();
-            }
-        });
-
-        Deault3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                breathAmount.setText("  59  ");
-                breathAmount.repaint();
-
-                eyeAmount.setText("  01  ");
-                eyeAmount.repaint();
-
-                breathmin.setText("  59  ");
-                breathmin.repaint();
-
-                eyemin.setText("  20  ");
-                eyemin.repaint();
-
-                snackmin.setText("  45  ");
-                snackmin.repaint();
-
-                snackHour.setText( "  40  ");
-                snackHour.repaint();
-
-                exercisemin.setText("  03  ");
-                exercisemin.repaint();
-
-                exercisemin.setText("  55  ");
-                exercisemin.repaint();
-
-                repaint();
-            }
-        });
         repaint();
-        //System.out.println("Settings Panel here");
     }
 
-    boolean toggle = false ;
+    // -----------------------------------------------------------------
+    // Methods
+    // -----------------------------------------------------------------
 
     public void newReminderCustom(String text, String amountReminder){
-
 
         JPanel pan = new JPanel();
         pan.setLayout(new FlowLayout());
@@ -693,13 +530,127 @@ public class TabSettings extends JComponent {
 
         pan.repaint();
 
-
-
-
         settingsControls.add(pan);
         settingsControls.repaint();
 
         repaint();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+
+        String command = actionEvent.getActionCommand();
+
+        if (LAZY.equals(command)) {
+            breathAmount.setText("  30  ");
+            breathAmount.repaint();
+
+            eyeAmount.setText("  05  ");
+            eyeAmount.repaint();
+
+            breathmin.setText("  15  ");
+            breathmin.repaint();
+
+            eyemin.setText("  10  ");
+            eyemin.repaint();
+
+            snackmin.setText("  33  ");
+            snackmin.repaint();
+
+            snackHour.setText( "  01  ");
+            snackHour.repaint();
+
+            exercisemin.setText("  45  ");
+            exercisemin.repaint();
+        }
+        else if (BUSY.equals(command)) {
+            breathAmount.setText("  20  ");
+            breathAmount.repaint();
+
+            eyeAmount.setText("  03  ");
+            eyeAmount.repaint();
+
+            breathmin.setText("  05  ");
+            breathmin.repaint();
+
+            eyemin.setText("  40  ");
+            eyemin.repaint();
+
+            snackmin.setText("  53  ");
+            snackmin.repaint();
+
+            snackHour.setText( "  00  ");
+            snackHour.repaint();
+
+            exercisemin.setText("  55  ");
+            exercisemin.repaint();
+
+            exerciseHour.setText("  02  ");
+            exerciseHour.repaint();
+        }
+        else if (NORMAL.equals(command)) {
+            breathAmount.setText("  59  ");
+            breathAmount.repaint();
+
+            eyeAmount.setText("  01  ");
+            eyeAmount.repaint();
+
+            breathmin.setText("  59  ");
+            breathmin.repaint();
+
+            eyemin.setText("  20  ");
+            eyemin.repaint();
+
+            snackmin.setText("  45  ");
+            snackmin.repaint();
+
+            snackHour.setText( "  40  ");
+            snackHour.repaint();
+
+            exercisemin.setText("  03  ");
+            exercisemin.repaint();
+
+            exercisemin.setText("  55  ");
+            exercisemin.repaint();
+        }
+        else if (ADD.equals(command)) {
+            JDialog form = new JDialog();
+            form.setSize(100,200);
+            form.setTitle("New reminder");
+
+            JPanel panny  = new JPanel();
+            panny.setLayout(new GridLayout(7,1));
+
+            JLabel nameReminder = new JLabel("  Name  " );
+            JTextField reminder = new JTextField("Social break");
+            JLabel freqReminder = new JLabel("  Frequency  " );
+            JTextField frequency = new JTextField("02:30:00");
+            JLabel amountReminder = new JLabel("  Amount  " );
+            JTextField amountreminder = new JTextField("10min");
+            JButton createButton = new JButton("  Create Reminder  ");
+            createButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //newReminderCustom((String) reminder.getText(), amountreminder.getText());
+                    form.setVisible(false);
+                }
+            });
+
+            panny.add(nameReminder);
+            panny.add(reminder);
+            panny.add(freqReminder);
+            panny.add(frequency);
+            panny.add(amountReminder);
+            panny.add(amountreminder);
+            panny.add(createButton);
+
+            form.add(panny);
+
+            form.pack();
+            form.setLocationRelativeTo(this);
+            form.setVisible(true);
+        }
+
+        repaint();
+    }
 }
